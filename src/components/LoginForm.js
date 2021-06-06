@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Button, TextInput, View, StyleSheet } from 'react-native';
+import { Text, Button, TextInput, View, StyleSheet, Image } from 'react-native';
 
 export default class App extends Component {
   constructor(props) {
@@ -9,13 +9,14 @@ export default class App extends Component {
     this.login = this.login.bind(this.state.username, this.state.password);
   }
   
-  // login() {
-    // const { username, password } = this.state;
-  // }
+  login() {
+    const { username, password } = this.state;
+  }
 
   render() {
     return (
       <View>
+      <Image source={require('../../assets/images/logo.jpg')} style={styles.logo}/>
         <Text style={styles.title}>Sign In To Oasis</Text>
 
         <Text style={styles.textInput}>email</Text>
@@ -36,21 +37,37 @@ export default class App extends Component {
         
         <Button
           title={'Login'}
+          color={'green'}
           style={styles.button}
           onPress={this.login.bind(this)}
         />
+
+        <Text style={styles.textInput}>New to Oasis?
+          <Text style={styles.textDesc}>Sign Up</Text>
+        </Text>
+        <Text style={styles.textDesc}>
+          forgot password?
+        </Text>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  logo: {
+    width:100,
+    height:100,
+    alignSelf: 'center',
+    padding: 30,
+  },
   title: {
     fontSize: 28,
+    paddingTop: 10,
     paddingBottom: 30,
   },
   textInput: {
     paddingBottom: 5,
+    fontSize: 16,
   },
   button: {
     width: 200,
@@ -69,14 +86,10 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     marginBottom: 10,
   },
-  inputContainer: {
-    margin: 20,
-    marginBottom: 0,
-    padding: 250,
-    paddingBottom: 10,
-    alignSelf: 'center',
-    borderWidth: 1,
-    borderColor: '#fff',
-    backgroundColor: 'rgba(255,255,255)',
-  },
+  textDesc: {
+    alignItems: 'center',
+    color: 'blue',
+    textDecorationLine: 'underline', 
+    fontSize: 16,
+  }
 });
