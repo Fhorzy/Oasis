@@ -1,35 +1,59 @@
 import React, { Component } from 'react';
-import { Text, Button, TextInput, View, StyleSheet, Image } from 'react-native';
+import { Text, Button, TextInput, View, StyleSheet, Image, Alert } from 'react-native';
+import registerPage from './RegisterForm';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     
-    this.state = {username: '', password: '', data: ''};
-    this.login = this.login.bind(this.state.username, this.state.password);
-  }
-  
-  login() {
-    const { username, password } = this.state;
+    this.state = {
+      email: '',
+      password: '', 
+    }
   }
 
+  validate=() => {
+    const { email, password } = this.state;
+    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    if (email == "") {
+      alert("Please input email");
+      return false;
+    }
+    else if(reg.test(this.state.email) === false){
+      alert("Invalid email format");
+      return false;
+    }
+    else if (password == "") {
+      alert("Please input password");
+      return false;
+    }
+    else
+      return true;
+  }
+
+  api_call=() => {
+    if (this.validate())
+      alert("Success");
+  }
+  
   render() {
     return (
       <View>
-      <Image source={require('../../assets/images/logo.jpg')} style={styles.logo}/>
-        <Text style={styles.title}>Sign In To Oasis</Text>
+      <Image source={require('../../assets/images/oasys.png')} style={styles.logo}/>
+        <Text style={styles.title}>Log In To Oasys</Text>
 
         <Text style={styles.textInput}>email</Text>
         <TextInput
-          value={this.state.username}
-          onChangeText={(username) => this.setState({ username })}
-          placeholder={'Username'}
+          autoCapitalize='none'
+          autoCorrect={false}
+          onChangeText={(value)=> this.setState({email: value})}
+          placeholder={'Email'}
           style={styles.input}
         />
         <Text style={styles.textInput}>password</Text>
         <TextInput
-          value={this.state.password}
-          onChangeText={(password) => this.setState({ password })}
+          onChangeText={(value)=> this.setState({password: value})}
           placeholder={'Password'}
           secureTextEntry={true}
           style={styles.input}
@@ -39,11 +63,11 @@ export default class App extends Component {
           title={'Login'}
           color={'green'}
           style={styles.button}
-          onPress={this.login.bind(this)}
+          onPress={()=>this.api_call()}
         />
 
-        <Text style={styles.textInput}>New to Oasis?
-          <Text style={styles.textDesc}>Sign Up</Text>
+        <Text style={styles.textInput}>New to Oasys?
+          <Text style={styles.textDesc} onPress={()=> moveTo(registerPage)}>Register</Text>
         </Text>
         <Text style={styles.textDesc}>
           forgot password?
