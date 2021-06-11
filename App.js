@@ -1,22 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginPage from './src/components/LoginForm';
 import RegisterPage from './src/components/RegisterForm';
+import ProfilePage from './src/components/UserProfile';
 
 export default function App() {
   return (
     <View style={styles.container}>
-     <Router>
-       <Switch>
-         <Route exact path='/login' component={LoginPage} />
-         <Route exact path='/register' component={RegisterPage} />
-       </Switch>
-     </Router>
-     <RegisterForm/>
+      <LoginPage/>
       <StatusBar style="auto" />
     </View>
+    
   );
 }
 

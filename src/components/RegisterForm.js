@@ -54,6 +54,7 @@ export default class App extends Component {
       <Image source={require('../../assets/images/oasys.png')} style={styles.logo}/>
         <Text style={styles.title}>Register To Oasys</Text>
 
+<View></View>
         <Text style={styles.textInput}>email</Text>
         <TextInput
           autoCapitalize='none'
@@ -86,7 +87,7 @@ export default class App extends Component {
         />
 
         <Text style={styles.textInput}>Already have an Account?</Text>
-          <Text style={styles.textDesc}  onPress={() => navigation.navigate('registerPage')}>Login</Text>
+          <Text style={styles.textDesc}  onPress={() => navigation.navigate(loginPage)}>Login</Text>
       </View>
     );
   }
