@@ -1,28 +1,21 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 import LoginPage from './LoginForm';
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      email: '',
-      password: '', 
-      confirmPassword: '',
-    }
-  }
+function App ({history}) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState(''); 
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  validate=() => {
-    const { email, password } = this.state;
+  const validate=() => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
     if (email == "") {
       alert("Please input email");
       return false;
     }
-    else if(reg.test(this.state.email) === false){
+    else if(reg.test(email) === false){
       alert("Invalid email format");
       return false;
     }
@@ -34,7 +27,7 @@ export default class App extends Component {
       alert("Password at least 6 characters");
       return false;
     }
-    else if (this.state.password !== this.state.confirmPassword) {
+    else if (password !== confirmPassword) {
       alert("Password not match"); 
       return false;
     }
@@ -43,12 +36,11 @@ export default class App extends Component {
 }
 
 
-  api_call=() => {
-    if (this.validate())
+  const api_call=() => {
+    if (validate())
       alert("Success");
   }
   
-  render() {
     return (
       <View>
       <Image source={require('../../assets/images/oasys.png')} style={styles.logo}/>
@@ -59,13 +51,13 @@ export default class App extends Component {
         <TextInput
           autoCapitalize='none'
           autoCorrect={false}
-          onChangeText={(value)=> this.setState({email: value})}
+          onChangeText={(value)=> this.setEmail({email: value})}
           placeholder={'Email'}
           style={styles.input}
         />
         <Text style={styles.textInput}>password</Text>
         <TextInput
-          onChangeText={(value)=> this.setState({password: value})}
+          onChangeText={(value)=> this.setPassword({password: value})}
           placeholder={'Password'}
           secureTextEntry={true}
           style={styles.input}
@@ -73,7 +65,7 @@ export default class App extends Component {
 
         <Text style={styles.textInput}>confirm password</Text>
         <TextInput
-          onChangeText={(value)=> this.setState({confirmPassword: value})}
+          onChangeText={(value)=> this.setConfirmPassword({confirmPassword: value})}
           placeholder={'Confirm Password'}
           secureTextEntry={true}
           style={styles.input}
@@ -83,14 +75,15 @@ export default class App extends Component {
           title={'Login'}
           color={'green'}
           style={styles.button}
-          onPress={()=>this.api_call()}
+          onPress={()=>api_call()}
         />
 
         <Text style={styles.textInput}>Already have an Account?</Text>
-          <Text style={styles.textDesc}  onPress={() => navigation.navigate(loginPage)}>Login</Text>
+          <Text style={styles.textDesc}  
+          onPress={() => history.push("/login")}
+          >Login</Text>
       </View>
     );
-  }
 }
 
 const styles = StyleSheet.create({
@@ -133,3 +126,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
   }
 });
+
+export default App;

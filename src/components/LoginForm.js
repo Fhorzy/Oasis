@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, Alert } from 'react-native';
 import registerPage from './RegisterForm';
 
-function App () {
+function App ({history}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -29,8 +29,10 @@ function App () {
   }
 
   const api_call=() => {
-    if (validate())
+    if (validate()) {
       alert("Success");
+      history.push("/");
+    }
   }
 
   return (
@@ -73,7 +75,7 @@ function App () {
       /></View>
 
       <Text style={styles.textInput}>New to Oasys?
-        <Text style={styles.textDesc} onPress={()=> moveTo(registerPage)}>Register</Text>
+        <Text style={styles.textDesc} onPress={()=> history.push("/register")}>Register</Text>
       </Text>
       <Text style={styles.textDesc}>
         forgot password?
