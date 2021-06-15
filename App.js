@@ -1,33 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { NativeRouter, Route, Switch } from 'react-router-native';
-import LoginPage from './src/components/LoginForm';
-import RegisterPage from './src/components/RegisterForm';
-import UserProfilePage from './src/components/UserProfile';
-import HomePage from './src/components/Dashboard';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-     <NativeRouter>
-       <Switch>
-         <Route exact path='/' component={HomePage} />
-         <Route exact path='/register' component={RegisterPage} />
-         <Route exact path='/login' component={LoginPage} />
-         <Route exact path='/user/profile' component={UserProfilePage} />
-       </Switch>
-     </NativeRouter>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import { createAppContainer } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import { Dimensions } from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+import { Feather } from '@expo/vector-icons';
+
+import { Profile, DashboardScreen, PlantScreen } from './src/screens';
+import Sidebar from './src/components/Sidebar';
+
+const DrawerNavigator = createDrawerNavigator({
+  Profile,
+  DashboardScreen,
+  PlantScreen
+}, {
+  contentComponent: props => <Sidebar {...props}/>
 });
+
+export default createAppContainer(DrawerNavigator);

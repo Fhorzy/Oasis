@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, Alert, addons } from 'react-native';
 
-function App (props) {
+function App () {
 
   return (
     <View>

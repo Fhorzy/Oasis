@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, Alert } from 'react-native';
-// import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import LoginPage from './LoginForm';
 
 function App ({history}) {
@@ -46,7 +46,6 @@ function App ({history}) {
       <Image source={require('../../assets/images/oasys.png')} style={styles.logo}/>
         <Text style={styles.title}>Register To Oasys</Text>
 
-<View></View>
         <Text style={styles.textInput}>email</Text>
         <TextInput
           autoCapitalize='none'
@@ -84,7 +83,7 @@ function App ({history}) {
           >Login</Text>
       </View>
     );
-}
+  }
 
 const styles = StyleSheet.create({
   logo: {
