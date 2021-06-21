@@ -38,7 +38,7 @@ function App ({history}) {
   return (
     <View>
       <View>
-        <Image source={require('../../assets/images/oasys.png')} style={styles.logo}/>
+        <Image source={require('../assets/images/oasys.png')} style={styles.logo}/>
       </View>
 
       <View style={styles.layout}>

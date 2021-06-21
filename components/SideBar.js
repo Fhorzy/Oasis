@@ -7,13 +7,14 @@ function Sidebar (props) {
 
   return (
    <ScrollView>
-    <ImageBackground source={require('../../assets/background.png')}
+    <View backgroundColor = {"#006400"}
       style = {{ width: undefined, padding: 16, paddingTop: 48 }}
     >
-      <Image source = {require('../../assets/images/user.jpg')} style = {styles.profile} />
-    </ImageBackground>
+      <Image source = {require('../assets/images/user.jpg')} style = {styles.profile} />
+      <Text style={styles.name}> Bambang </Text>
+    </View>
 
-    <View>
+    <View style={styles.container}>
       <DrawerNavigatorItems {...props} />
     </View>
   </ScrollView>
@@ -31,7 +32,13 @@ const styles = StyleSheet.create ({
     borderRadius: 40,
     borderWidth: 3,
     borderColor: "#FFF"
-  }
+  },
+   name: {
+     color: "#FFF",
+     fontSize: 20,
+     fontWeight: "800",
+     marginVertical: 0
+   },
 });
 
 export default Sidebar;

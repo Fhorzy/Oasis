@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, Alert, addons } from 'react-native';
+import Screen from './Screen';
 
-function App ({history}) {
+const DashboardScreen = ({navigation}) => {
 
     const logout =()=>{
 
@@ -12,7 +13,11 @@ function App ({history}) {
 
   return (
     <View>
-    <Image source={require('../../assets/images/user.jpg')} style={styles.profile_picture}/>
+      <View>
+        <Screen navigation={navigation} name='Dashboard' />
+        </View>
+        <View  style={styles.container}>
+    <Image source={require('../assets/images/user.jpg')} style={styles.profile_picture}/>
     <Text style={styles.editPicture}>Edit Picture</Text>
   
     <Text style={styles.text}>Nama</Text>
@@ -27,6 +32,8 @@ function App ({history}) {
         onPress={()=>this.logout()}
       />
     </View>
+    </View>
+
   );
 }
 
@@ -35,6 +42,12 @@ const logout=() => {
 }  
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   profile_picture: {
     width:100,
     height:100,
@@ -61,4 +74,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default DashboardScreen;

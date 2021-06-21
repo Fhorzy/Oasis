@@ -43,7 +43,7 @@ function App ({history}) {
   
     return (
       <View>
-      <Image source={require('../../assets/images/oasys.png')} style={styles.logo}/>
+      <Image source={require('../assets/images/oasys.png')} style={styles.logo}/>
         <Text style={styles.title}>Register To Oasys</Text>
 
         <Text style={styles.textInput}>email</Text>

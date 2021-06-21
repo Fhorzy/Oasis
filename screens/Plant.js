@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, Alert, addons } from 'react-native';
+import Screen from './Screen';
 
-function App () {
+const PlantScreen = ({navigation}) => {
+
+    const logout =()=>{
+
+    }
+    const changePassword=()=>{
+        
+    }
 
   return (
     <View>
-    <Image source={require('../../assets/images/user.jpg')} style={styles.profile_picture}/>
+        <View>
+        <Screen navigation={navigation} name='Plant' />
+      </View>
+    <Image source={require('../assets/images/user.jpg')} style={styles.profile_picture}/>
     <Text style={styles.editPicture}>Edit Picture</Text>
   
     <Text style={styles.text}>Nama</Text>
     <Text style={styles.textInput}>Email</Text>
     <Text style={styles.textInput}>Password</Text>
+    <Button title = 'Change Password' onPress = {() =>this.changePassword()}/>
           
       <Button
         title={'Log Out'}
@@ -53,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default PlantScreen;
