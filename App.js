@@ -12,8 +12,8 @@ import DashboardScreen from './screens/Dashboard';
 import PlantScreen from './screens/Plant';
 import { AuthContext } from './components/context';
 import Display from './screens/DisplayScreen';
-import SignUp from './screens/SignUpScreen';
-import { SignOutScreen } from './screens';
+import SignUpScreen from './screens/SignUpScreen';
+import SignInScreen from './screens/SignInScreen';
 
 const DrawerNavigator = createDrawerNavigator({
   DashboardScreen: {
@@ -43,6 +43,18 @@ const DrawerNavigator = createDrawerNavigator({
       title: "Sign Out",
       drawerIcon: ({ tintColor }) => <FontAwesome5 name="sign-out-alt" size={16} color={'tintColor'} />
     },
+  },
+  SignInScreen: {
+    screen: SignInScreen,
+    navigationOptions: {
+      title: '',
+    }
+  },
+  SignUpScreen: {
+    screen: SignUpScreen,
+    navigationOptions: {
+      title: '',
+    }
   }
 }, {
   contentComponent: props => <Sidebar {...props} />

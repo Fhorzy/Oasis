@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, Alert } from 'react-native';
 import SignInScreen from './SignInScreen';
+import { withNavigation  } from 'react-navigation';
 
 class SignUp extends React.Component {
 
@@ -91,7 +92,7 @@ class SignUp extends React.Component {
 
       <Text style={styles.textInput}>Already have an Account?</Text>
       <Text style={styles.textDesc}
-        onPress={() => this.props.navigation.navigate('ProfileScreen')}
+        onPress={() => this.props.navigation.navigate('SignInScreen')} 
       >Sign In</Text>
     </View>
   );}
@@ -141,4 +142,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SignUp;
+export default withNavigation(SignUp);
