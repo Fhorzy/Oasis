@@ -1,33 +1,38 @@
 import React, { useState } from 'react';
-import { Text, Button, TextInput, View, StyleSheet, Image, Alert, TouchableOpacity} from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Screen from './Screen';
 
-const ProfileScreen = ({navigation}) => {
+const ProfileScreen = ({ navigation }) => {
+
+  const nama = "Bambang";
 
   return (
     <View style={styles.container}>
       <View>
         <Screen navigation={navigation} name='Profile' />
       </View>
-    <View>
+      <View>
 
-    <Image source={require('../assets/images/user.jpg')} style={styles.profile_picture}/>
+        <Image source={require('../assets/images/user.jpg')} style={styles.profile_picture} />
 
 
-    <Text style={styles.text}>Nama</Text>
-    <Text style={styles.text}>Email</Text>
-    <Text style={styles.text}>Password</Text>
-      <TouchableOpacity style = {styles.button}>
-        <Text style = {styles.logoutText}>Logout</Text>
-      </TouchableOpacity>
-    </View>
+        <Text style={styles.text}>Nama</Text>
+        <Text style={styles.text}>
+          {nama}
+        </Text>
+        <Text style={styles.text}>Email</Text>
+        <Text style={styles.text}>Password</Text>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.logoutText}>Logout</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
-const logout=() => {
+const signOut = () => {
 
-}  
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -37,8 +42,8 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
   },
   profile_picture: {
-    width:150,
-    height:150,
+    width: 150,
+    height: 150,
     alignSelf: 'center',
     padding: 30,
     borderRadius: 80,

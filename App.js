@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { createAppContainer } from 'react-navigation';
 import { createDrawerNavigator } from 'react-navigation-drawer';
-import { Dimensions } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 
 import { FontAwesome5, Feather } from '@expo/vector-icons';
 
@@ -10,6 +10,10 @@ import Sidebar from './components/SideBar';
 import ProfileScreen from './screens/UserProfile';
 import DashboardScreen from './screens/Dashboard';
 import PlantScreen from './screens/Plant';
+import { AuthContext } from './components/context';
+import Display from './screens/DisplayScreen';
+import SignUp from './screens/SignUpScreen';
+import { SignOutScreen } from './screens';
 
 const DrawerNavigator = createDrawerNavigator({
   DashboardScreen: {
@@ -21,7 +25,7 @@ const DrawerNavigator = createDrawerNavigator({
   },
   ProfileScreen: {
     screen: ProfileScreen,
-    navigationOptions:{
+    navigationOptions: {
       title: "Profile",
       drawerIcon: ({ tintColor }) => <Feather name="user" size={16} color={tintColor} />
     }
@@ -32,9 +36,62 @@ const DrawerNavigator = createDrawerNavigator({
       title: "Plant",
       drawerIcon: ({ tintColor }) => <FontAwesome5 name="seedling" size={16} color={tintColor} />
     }
+  },
+  SignOutScreen: {
+    screen: Display,
+    navigationOptions: {
+      title: "Sign Out",
+      drawerIcon: ({ tintColor }) => <FontAwesome5 name="sign-out-alt" size={16} color={'tintColor'} />
+    },
   }
 }, {
-  contentComponent: props => <Sidebar {...props}/>
+  contentComponent: props => <Sidebar {...props} />
 });
 
-export default createAppContainer(DrawerNavigator);
+const AppContainer = createAppContainer(DrawerNavigator);
+
+const App = () => {
+  const[isLoading, setIsLoading] = React.useState(true);
+  const[userToken, setUserToken] = React.useState(null);
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
+  const authContext = React.useMemo(() => ({
+    signUp: () => {
+      setUserToken('token');
+      setIsLoading(false);
+    },
+    signIn: () => {
+      setUserToken('token');
+      setIsLoading(false);
+    },
+    signOut: () => {
+      setUserToken(null);
+      setIsLoading(false);
+    }
+  }));
+
+  if ( isLoading ) {
+    return (
+      <View style = {{flex:1, justifyContent:'center', alignItems:'center'}}>
+        <ActivityIndicator color='#00FF00' size='large'/>
+      </View>
+    );
+  }
+
+  return (
+    <AuthContext.Provider value={authContext}>
+    {/* { userToken !== null ?  */}
+      <AppContainer />  
+      {/* : <Display /> */}
+    {/* } */}
+    </AuthContext.Provider>
+  );
+}
+
+export default App;

@@ -7,11 +7,11 @@ export default class Screen extends React.Component {
         return (
             <View backgroundColor={"#006400"}>
                 <SafeAreaView>
-                    <TouchableOpacity 
-                        style={{alignItems: "flex-end", margin: 16}} 
+                    <TouchableOpacity
+                        style={{ alignItems: "flex-end", margin: 16 }}
                         onPress={this.props.navigation.openDrawer}
                     >
-                        <FontAwesome5 name="bars" size={24} color="#161924" style={styles.bar}/>
+                        <FontAwesome5 name="bars" size={24} color="#161924" style={styles.bar} />
                     </TouchableOpacity>
                 </SafeAreaView>
             </View>

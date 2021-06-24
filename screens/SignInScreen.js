@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, Alert } from 'react-native';
-import registerPage from './RegisterForm';
+import registerPage from './SignUpScreen';
+import { AuthContext } from '../components/context';
 
-function App ({history}) {
+const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -31,9 +32,10 @@ function App ({history}) {
   const api_call=() => {
     if (validate()) {
       alert("Success");
-      history.push("/");
     }
   }
+
+  const { signIn } = React.useContext(AuthContext);
 
   return (
     <View>
@@ -42,7 +44,7 @@ function App ({history}) {
       </View>
 
       <View style={styles.layout}>
-        <Text style={styles.title}>Log In To Oasys</Text>
+        <Text style={styles.title}>Sign In To Oasys</Text>
       </View>
 
       <View style={styles.inputLayout}><Text style={styles.textInput}>email</Text></View>
@@ -68,18 +70,19 @@ function App ({history}) {
         
       <View>
       <Button
-        title={'Login'}
+        title={'Sign In'}
         color={'green'}
         style={styles.button}
-        onPress={()=>api_call()}
+        // onPress={()=>api_call()}
+        onPress={()=>{signIn}}
       /></View>
 
       <Text style={styles.textInput}>New to Oasys?
-        <Text style={styles.textDesc} onPress={()=> history.push("/register")}>Register</Text>
+        <Text style={styles.textDesc} onPress={()=> history.push('/signup')}>Sign Up</Text>
       </Text>
-      <Text style={styles.textDesc}>
+      {/* <Text style={styles.textDesc}>
         forgot password?
-      </Text>
+      </Text> */}
     </View>
   );
 }
@@ -129,4 +132,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default App;
+export default SignIn;

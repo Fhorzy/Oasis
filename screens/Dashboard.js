@@ -1,45 +1,33 @@
 import React, { useState } from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, Alert, addons } from 'react-native';
 import Screen from './Screen';
+import { FontAwesome5 } from '@expo/vector-icons';
 
-const DashboardScreen = ({navigation}) => {
+const DashboardScreen = ({ navigation }) => {
 
-    const logout =()=>{
+  const logout = () => {
 
-    }
-    const changePassword=()=>{
-        
-    }
+  }
+  const changePassword = () => {
+
+  }
 
   return (
     <View>
       <View>
         <Screen navigation={navigation} name='Dashboard' />
-        </View>
-        <View  style={styles.container}>
-    <Image source={require('../assets/images/user.jpg')} style={styles.profile_picture}/>
-    <Text style={styles.editPicture}>Edit Picture</Text>
-  
-    <Text style={styles.text}>Nama</Text>
-    <Text style={styles.textInput}>Email</Text>
-    <Text style={styles.textInput}>Password</Text>
-    <Button title = 'Change Password' onPress = {() =>this.changePassword()}/>
-          
-      <Button
-        title={'Log Out'}
-        color={'green'}
-        style={styles.button}
-        onPress={()=>this.logout()}
-      />
-    </View>
+      </View>
+      <View style={styles.container}>
+        {/* <FontAwesome5 name /> */}
+      </View>
     </View>
 
   );
 }
 
-const logout=() => {
+const logout = () => {
 
-}  
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -49,8 +37,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   profile_picture: {
-    width:100,
-    height:100,
+    width: 100,
+    height: 100,
     alignSelf: 'center',
     padding: 30,
   },

@@ -1,47 +1,47 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, Alert, addons } from 'react-native';
 import Screen from './Screen';
 
-const PlantScreen = ({navigation}) => {
+const PlantScreen = ({ navigation }) => {
 
-    const logout =()=>{
+  const logout = () => {
 
-    }
-    const changePassword=()=>{
-        
-    }
+  }
+  const changePassword = () => {
+
+  }
 
   return (
     <View>
-        <View>
+      <View>
         <Screen navigation={navigation} name='Plant' />
       </View>
-    <Image source={require('../assets/images/user.jpg')} style={styles.profile_picture}/>
-    <Text style={styles.editPicture}>Edit Picture</Text>
-  
-    <Text style={styles.text}>Nama</Text>
-    <Text style={styles.textInput}>Email</Text>
-    <Text style={styles.textInput}>Password</Text>
-    <Button title = 'Change Password' onPress = {() =>this.changePassword()}/>
-          
+      <Image source={require('../assets/images/user.jpg')} style={styles.profile_picture} />
+      <Text style={styles.editPicture}>Edit Picture</Text>
+
+      <Text style={styles.text}>Nama</Text>
+      <Text style={styles.textInput}>Email</Text>
+      <Text style={styles.textInput}>Password</Text>
+      <Button title='Change Password' onPress={() => this.changePassword()} />
+
       <Button
         title={'Log Out'}
         color={'green'}
         style={styles.button}
-        onPress={()=>this.logout()}
+        onPress={() => this.logout()}
       />
     </View>
   );
 }
 
-const logout=() => {
+const logout = () => {
 
-}  
+}
 
 const styles = StyleSheet.create({
   profile_picture: {
-    width:100,
-    height:100,
+    width: 100,
+    height: 100,
     alignSelf: 'center',
     padding: 30,
   },
