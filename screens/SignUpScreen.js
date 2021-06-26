@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, Alert } from 'react-native';
 import SignInScreen from './SignInScreen';
 import { withNavigation  } from 'react-navigation';
 
-const SignUp = () => {
+const SignUp = ({navigation}) => {
 
   // constructor(props) {
   //   super(props);
@@ -23,23 +23,23 @@ const SignUp = () => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const { email, password, confirm_password } = this.state;
 
-    if (this.state.email == "") {
+    if (email == "") {
       alert("Please input email");
       return false;
     }
-    else if (reg.test(this.state.email) === false) {
+    else if (reg.test(email) === false) {
       alert("Invalid email format");
       return false;
     }
-    else if (this.state.password == "") {
+    else if (password == "") {
       alert("Please input password");
       return false;
     }
-    else if (this.state.password.length < 6) {
+    else if (password.length < 6) {
       alert("Password at least 6 characters");
       return false;
     }
-    else if (this.state.password !== this.state.confirm_password) {
+    else if (password !== confirm_password) {
       alert("Password not match");
       return false;
     }
@@ -49,9 +49,9 @@ const SignUp = () => {
 
 
   const api_call = () => {
-    if (this.validate()) {
+    if (validate()) {
       alert("Success");
-      this.props.navigation.navigate('DashboardScreen');
+      // this.props.navigation.navigate('DashboardScreen');
    }
   }
 
@@ -65,13 +65,13 @@ const SignUp = () => {
       <TextInput
         autoCapitalize='none'
         autoCorrect={false}
-        onChangeText={(value) => this.setState({email: value})}
+        onChangeText={(value) => setEmail(value)}
         placeholder={'Email'}
         style={styles.input}
       />
       <Text style={styles.textInput}>password</Text>
       <TextInput
-        onChangeText={(value) => this.setState({password: value})}
+        onChangeText={(value) => setPassword(value)}
         placeholder={'Password'}
         secureTextEntry={true}
         style={styles.input}
@@ -79,7 +79,7 @@ const SignUp = () => {
 
       <Text style={styles.textInput}>confirm password</Text>
       <TextInput
-        onChangeText={(value) => this.setState({confirm_password: value})}
+        onChangeText={(value) => setConfirmPassword(value)}
         placeholder={'Confirm Password'}
         secureTextEntry={true}
         style={styles.input}
@@ -144,4 +144,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withNavigation(SignUp);
+export default SignUp;

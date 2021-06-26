@@ -126,7 +126,7 @@ const App = () => {
 
   return (
     <AuthContext.Provider value={authContext}>
-    { userToken == null ? 
+    { userToken !== null ? 
       <AppContainer />
        : <Display />
     }
