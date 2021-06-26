@@ -2,26 +2,40 @@ import React, { useState } from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, Alert } from 'react-native';
 import registerPage from './SignUpScreen';
 import { AuthContext } from '../components/context';
+import { withNavigation  } from 'react-navigation';
+import { useNavigation } from '@react-navigation/native';
 
-const SignIn = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+class SignIn extends React.Component {
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
 
-  const validate=() => {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: '',
+      password: '', 
+      confirm_password: '',
+    }
+  }
+
+   validate=() => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (email == "") {
+    const { email, password, confirm_password } = this.state;
+
+    if (this.state.email == "") {
       alert("Please input email");
       return false;
     }
-    else if(reg.test(email) === false){
+    else if (reg.test(this.state.email) === false) {
       alert("Invalid email format");
       return false;
     }
-    else if (password == "") {
+    else if (this.state.password == "") {
       alert("Please input password");
       return false;
     }
-    else if (password.length < 6) {
+    else if (this.state.password.length < 6) {
       alert("Password at least 6 characters");
       return false;
     }
@@ -29,16 +43,17 @@ const SignIn = () => {
       return true;
   }
 
-  const api_call=() => {
-    if (validate()) {
+   api_call=() => {
+    if (this.validate()) {
       alert("Success");
+      signIn();
     }
   }
+  // const {signIn} = React.useContext(AuthContext);
 
-  const { signIn } = React.useContext(AuthContext);
-
+  render() {
   return (
-    <View>
+    <View style={styles.container}>
       <View>
         <Image source={require('../assets/images/oasys.png')} style={styles.logo}/>
       </View>
@@ -52,7 +67,7 @@ const SignIn = () => {
       <TextInput
         autoCapitalize='none'
         autoCorrect={false}
-        onChangeText={(value)=> setEmail(value)}
+        onChangeText={(value)=> this.setState({email: value})}
         placeholder={'Email'}
         style={styles.input}
       />
@@ -61,7 +76,7 @@ const SignIn = () => {
       <View style={styles.inputLayout}><Text style={styles.textInput}>password</Text></View>
       <View>
       <TextInput
-        onChangeText={(value)=> setPassword(value)}
+        onChangeText={(value)=> this.setState({password: value})}
         placeholder={'Password'}
         secureTextEntry={true}
         style={styles.input}
@@ -74,17 +89,18 @@ const SignIn = () => {
         color={'green'}
         style={styles.button}
         // onPress={()=>api_call()}
-        onPress={()=>{signIn}}
+        onPress={()=>{signIn()}}
       /></View>
 
       <Text style={styles.textInput}>New to Oasys?
-        <Text style={styles.textDesc} onPress={()=> history.push('/signup')}>Sign Up</Text>
+        <Text style={styles.textDesc} onPress={()=> this.props.navigation.navigate('SignUpScreen')}>Sign Up</Text>
       </Text>
       {/* <Text style={styles.textDesc}>
         forgot password?
       </Text> */}
     </View>
   );
+}
 }
 
 const styles = StyleSheet.create({
@@ -129,7 +145,10 @@ const styles = StyleSheet.create({
     color: 'blue',
     textDecorationLine: 'underline', 
     fontSize: 16,
-  }
+  },
+  container: {
+    alignSelf:'center'
+  },
 });
 
-export default SignIn;
+export default withNavigation(SignIn);

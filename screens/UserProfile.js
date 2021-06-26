@@ -17,9 +17,9 @@ const ProfileScreen = ({ navigation }) => {
 
 
         <Text style={styles.text}>Nama</Text>
-        <Text style={styles.text}>
-          {nama}
-        </Text>
+        {/* <Text style={styles.text}> */}
+          {/* {nama} */}
+        {/* </Text> */}
         <Text style={styles.text}>Email</Text>
         <Text style={styles.text}>Password</Text>
         <TouchableOpacity style={styles.button}>

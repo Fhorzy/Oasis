@@ -3,22 +3,23 @@ import { Text, Button, TextInput, View, StyleSheet, Image, Alert } from 'react-n
 import SignInScreen from './SignInScreen';
 import { withNavigation  } from 'react-navigation';
 
-class SignUp extends React.Component {
+const SignUp = () => {
 
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      email: '',
-      password: '', 
-      confirm_password: '',
-    }
-  }
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [confirmPassword, setConfirmPassword] = useState('');
+  //   this.state = {
+  //     email: '',
+  //     password: '', 
+  //     confirm_password: '',
+  //   }
+  // }
+  
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  validate = () => {
+  const validate = () => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const { email, password, confirm_password } = this.state;
 
@@ -47,13 +48,14 @@ class SignUp extends React.Component {
   }
 
 
-  api_call = () => {
+  const api_call = () => {
     if (this.validate()) {
       alert("Success");
+      this.props.navigation.navigate('DashboardScreen');
    }
   }
 
-  render () {
+  // render () {
   return (
     <View style={styles.container}>
       <Image source={require('../assets/images/oasys.png')} style={styles.logo} />
@@ -96,7 +98,7 @@ class SignUp extends React.Component {
       >Sign In</Text>
     </View>
   );}
-}
+// }
 
 const styles = StyleSheet.create({
   logo: {

@@ -1,24 +1,27 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import SignUpScreen from './SignUpScreen';
-import SignInScreen from './SignUpScreen';
+import SignInScreen from './SignInScreen';
 
-const RootStack = createStackNavigator(
-    {
-      SignUpScreen: SignUpScreen,
-      SignInScreen: SignInScreen,
-    },
-    {
-      initialRouteName: 'SignUpScreen',
-    }
-  );
+// const RootStack = createStackNavigator(
+//     {
+//       SignUpScreen: SignUpScreen,
+//       SignInScreen: SignInScreen,
+//     },
+//     {
+//       initialRouteName: 'SignUpScreen',
+//     }
+//   );
+
+
 
 const Display = () => {
     return (
-        <RootStack />
-        // <SignUpScreen />
+        // <RootStack />
+        // <Text>Test</Text>
+        <SignInScreen />
         // <View style={styles.layout}>
         //   <Image source={require('../assets/images/oasys.png')} style={styles.logo} />
         //   <Text style={styles.title}>Welcome To Oasys</Text>

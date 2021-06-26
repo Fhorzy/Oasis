@@ -14,6 +14,28 @@ import { AuthContext } from './components/context';
 import Display from './screens/DisplayScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import SignInScreen from './screens/SignInScreen';
+import { createStackNavigator } from 'react-navigation-stack';
+
+const SignOutScreen = createStackNavigator({
+  DisplayScreen: {
+    screen: Display,
+    navigationOptions: {
+      title: 'Sign In',
+    }
+  },
+  SignInScreen: {
+    screen: SignInScreen,
+    navigationOptions: {
+      title: 'Sign In',
+    }
+  },
+  SignUpScreen: {
+    screen: SignUpScreen,
+    navigationOptions: {
+      title: 'Sign Out',
+    }
+  }
+});
 
 const DrawerNavigator = createDrawerNavigator({
   DashboardScreen: {
@@ -38,24 +60,30 @@ const DrawerNavigator = createDrawerNavigator({
     }
   },
   SignOutScreen: {
-    screen: Display,
+    screen: SignOutScreen,
     navigationOptions: {
       title: "Sign Out",
       drawerIcon: ({ tintColor }) => <FontAwesome5 name="sign-out-alt" size={16} color={'tintColor'} />
     },
   },
-  SignInScreen: {
-    screen: SignInScreen,
-    navigationOptions: {
-      title: '',
-    }
-  },
-  SignUpScreen: {
-    screen: SignUpScreen,
-    navigationOptions: {
-      title: '',
-    }
-  }
+  // SignIn: {
+  //   screen: SignScreen,
+  //   navigationOptions: {
+  //     title: ''
+  //   }
+  // }
+  // SignInScreen: {
+  //   screen: SignInScreen,
+  //   navigationOptions: {
+  //     title: '',
+  //   }
+  // },
+  // SignUpScreen: {
+  //   screen: SignUpScreen,
+  //   navigationOptions: {
+  //     title: '',
+  //   }
+  // }
 }, {
   contentComponent: props => <Sidebar {...props} />
 });
@@ -98,10 +126,10 @@ const App = () => {
 
   return (
     <AuthContext.Provider value={authContext}>
-    {/* { userToken !== null ?  */}
-      <AppContainer />  
-      {/* : <Display /> */}
-    {/* } */}
+    { userToken == null ? 
+      <AppContainer />
+       : <Display />
+    }
     </AuthContext.Provider>
   );
 }
