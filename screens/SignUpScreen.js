@@ -3,7 +3,7 @@ import { Text, Button, TextInput, View, StyleSheet, Image, Alert } from 'react-n
 import SignInScreen from './SignInScreen';
 import { withNavigation  } from 'react-navigation';
 
-const SignUp = ({navigation}) => {
+const SignUpScreen = ({navigation}) => {
 
   // constructor(props) {
   //   super(props);
@@ -144,4 +144,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SignUp;
+export default SignUpScreen;

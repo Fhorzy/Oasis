@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import GlobalStyles from '../styles/GlobalStyles';
 import Screen from './Screen';
 
 const ProfileScreen = ({ navigation }) => {
@@ -7,7 +8,7 @@ const ProfileScreen = ({ navigation }) => {
   const nama = "Bambang";
 
   return (
-    <View style={styles.container}>
+    <View style={GlobalStyles.screenContainer}>
       <View>
         <Screen navigation={navigation} name='Profile' />
       </View>
@@ -35,12 +36,6 @@ const signOut = () => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
   profile_picture: {
     width: 150,
     height: 150,

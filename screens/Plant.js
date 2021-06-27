@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, Alert, addons } from 'react-native';
+import GlobalStyles from '../styles/GlobalStyles';
 import Screen from './Screen';
 
 const PlantScreen = ({ navigation }) => {
@@ -12,7 +13,7 @@ const PlantScreen = ({ navigation }) => {
   }
 
   return (
-    <View>
+    <View style = {GlobalStyles.screenContainer}>
       <View>
         <Screen navigation={navigation} name='Plant' />
       </View>

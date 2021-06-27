@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import registerPage from './SignUpScreen';
-import { AuthContext } from '../components/context';
 import { withNavigation  } from 'react-navigation';
-import { useNavigation } from '@react-navigation/native';
+import SignUpScreen from './SignUpScreen';
 
-const SignIn = ({navigation}) => {
+import { AuthContext } from '../components/context';
+
+
+function SignInScreen ({navigation}) {
 
   // This is for func component
   const [email, setEmail] = useState('');
@@ -45,15 +46,16 @@ const SignIn = ({navigation}) => {
     else
       return true;
   }
+  
+const {signIn} = React.useContext(AuthContext);
 
  const api_call=() => {
     if (validate()) {
       alert("Success");
       signIn();
     }
-}
-  // const {signIn} = React.useContext(AuthContext);
-
+  }
+  
   // render() {
   return (
     <View style={styles.container}>
@@ -91,12 +93,12 @@ const SignIn = ({navigation}) => {
         title={'Sign In'}
         color={'green'}
         style={styles.button}
-        // onPress={()=>api_call()}
-        onPress={()=>{signIn()}}
+        onPress={()=>api_call()}
+        // onPress={()=>{signIn()}}
       /></View>
 
       <Text style={styles.textInput}>New to Oasys?
-        <TouchableOpacity onPress={() => useNavigation.navigation.navigate()}>
+        <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>
         <Text style={styles.textDesc}>Sign Up</Text>
         </TouchableOpacity>
       </Text>
@@ -156,4 +158,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignIn;
+export default SignInScreen;
