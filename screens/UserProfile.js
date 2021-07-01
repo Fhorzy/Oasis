@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import GlobalStyles from '../styles/GlobalStyles';
-import Screen from './Screen';
 
 const ProfileScreen = ({ navigation }) => {
 
@@ -9,9 +8,6 @@ const ProfileScreen = ({ navigation }) => {
 
   return (
     <View style={GlobalStyles.screenContainer}>
-      <View>
-        <Screen navigation={navigation} name='Profile' />
-      </View>
       <View>
 
         <Image source={require('../assets/images/user.jpg')} style={styles.profile_picture} />

@@ -25,9 +25,9 @@ function SignInScreen ({navigation}) {
 
  const validate=() => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const { email, password, confirm_password } = this.state;
+    // const { email, password } = this.state;
 
-    if (email == "") {
+    if (!email) {
       alert("Please input email");
       return false;
     }
@@ -35,7 +35,7 @@ function SignInScreen ({navigation}) {
       alert("Invalid email format");
       return false;
     }
-    else if (password == "") {
+    else if (!password) {
       alert("Please input password");
       return false;
     }
@@ -47,12 +47,13 @@ function SignInScreen ({navigation}) {
       return true;
   }
   
-const {signIn} = React.useContext(AuthContext);
+// const {signIn} = React.useContext(AuthContext);
 
  const api_call=() => {
     if (validate()) {
       alert("Success");
-      signIn();
+      navigation.replace('DrawerNavigation');
+      // signIn();
     }
   }
   

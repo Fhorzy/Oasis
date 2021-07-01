@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, Alert } from 'react-native';
-import SignInScreen from './SignInScreen';
-import { withNavigation  } from 'react-navigation';
 
 const SignUpScreen = ({navigation}) => {
 
@@ -21,7 +19,7 @@ const SignUpScreen = ({navigation}) => {
 
   const validate = () => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const { email, password, confirm_password } = this.state;
+    // const { email, password, confirm_password } = this.state;
 
     if (email == "") {
       alert("Please input email");
@@ -94,7 +92,7 @@ const SignUpScreen = ({navigation}) => {
 
       <Text style={styles.textInput}>Already have an Account?</Text>
       <Text style={styles.textDesc}
-        onPress={() => this.props.navigation.navigate('SignInScreen')} 
+        onPress={() => navigation.navigate('SignInScreen')} 
       >Sign In</Text>
     </View>
   );}

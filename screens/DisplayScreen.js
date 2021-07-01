@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import SignUpScreen from './SignUpScreen';
 import SignInScreen from './SignInScreen';
-import { createAppContainer } from 'react-navigation';
+import DrawerNavigation from '../components/NavigationScreen';
 
 // const RootStack = createStackNavigator(
 //     {
@@ -40,28 +40,34 @@ import { createAppContainer } from 'react-navigation';
 
 //   const SignOutScreen = createAppContainer(StackScreen);
 
-const Stack = createStackNavigator();
+// const Stack = createStackNavigator();
+// const SignInStack = createStackNavigator();
 
-function StackNavigation () {
-  return (
-      <Stack.Screen name = 'SignInScreen' component = {SignInScreen} />
-  );
-}
+// function StackNavigation () {
+//   return (
+//       <Stack.Screen name = 'SignInStack' component = {SignInStack} />
+//   );
+// }
+
+// function SignInStackScreen () {
+//   return (
+//     <SignInStack.Screen name = 'SignInScreen' component = {SignInScreen} />
+//   );
+// }
 
 function DisplayScreen ({navigation}) {
 // render(){
     return (
       <View style = {styles.view}>
-      <StackNavigation />
         <Image source={require('../assets/images/oasys.png')} style={styles.logo}/>
         <Text style = {styles.title}>
           Welcome To Oasys
         </Text>
-        <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('SignInScreen')}>
+        <TouchableOpacity style = {styles.button} onPress={() => navigation.navigate('SignInScreen')}> 
           <Text style = {styles.text}> Sign In </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style = {styles.button} >
+        <TouchableOpacity style = {styles.button} onPress={() => navigation.navigate('SignUpScreen')} >
           <Text style = {styles.text}> Sign Up </Text>
         </TouchableOpacity>
       </View>
