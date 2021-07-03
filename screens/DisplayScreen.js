@@ -1,62 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Button } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
-
-import SignUpScreen from './SignUpScreen';
-import SignInScreen from './SignInScreen';
-import DrawerNavigation from '../components/NavigationScreen';
-
-// const RootStack = createStackNavigator(
-//     {
-//       SignUpScreen: SignUpScreen,
-//       SignInScreen: SignInScreen,
-//     },
-//     {
-//       initialRouteName: 'SignUpScreen',
-//     }
-//   );
-
-// const StackScreen = createStackNavigator({
-//     // DisplayScreen: {
-//     //   screen: Display,
-//     //   navigationOptions: {
-//     //     title: 'Sign In',
-//     //   }
-//     // },
-//     SignInScreen: {
-//       screen: SignInScreen,
-//       navigationOptions: {
-//         title: 'Sign In',
-//       }
-//     },
-//     SignUpScreen: {
-//       screen: SignUpScreen,
-//       navigationOptions: {
-//         title: 'Sign Out',
-//       }
-//     }
-//   });
-
-//   const SignOutScreen = createAppContainer(StackScreen);
-
-// const Stack = createStackNavigator();
-// const SignInStack = createStackNavigator();
-
-// function StackNavigation () {
-//   return (
-//       <Stack.Screen name = 'SignInStack' component = {SignInStack} />
-//   );
-// }
-
-// function SignInStackScreen () {
-//   return (
-//     <SignInStack.Screen name = 'SignInScreen' component = {SignInScreen} />
-//   );
-// }
 
 function DisplayScreen ({navigation}) {
-// render(){
     return (
       <View style = {styles.view}>
         <Image source={require('../assets/images/oasys.png')} style={styles.logo}/>
@@ -71,19 +16,7 @@ function DisplayScreen ({navigation}) {
           <Text style = {styles.text}> Sign Up </Text>
         </TouchableOpacity>
       </View>
-        // <Text>Test</Text>
-        // <SignInScreen screenName="SignUpScreen" />
-        // <View style={styles.layout}>
-        //   <Image source={require('../assets/images/oasys.png')} style={styles.logo} />
-        //   <Text style={styles.title}>Welcome To Oasys</Text>
-        //   <View>
-        //     <TouchableOpacity style={styles.button}>
-        //         <Text style={styles.logoutText}>Logout</Text>
-        //     </TouchableOpacity>
-        //   </View>
-        // </View>
       );
-    // }
 }
 
 const styles = StyleSheet.create({
@@ -99,7 +32,6 @@ const styles = StyleSheet.create({
       paddingTop: 30,
     },
     view: {
-        // fontSize: 28,
         paddingTop: 60,
     },
     button: {
@@ -111,10 +43,6 @@ const styles = StyleSheet.create({
       backgroundColor: '#006400',
       borderColor: 'black',
       marginTop: 10,
-    },
-    layout: {
-        paddingTop: 10,
-        paddingBottom: 30,
     },
     text: {
       padding: 5,

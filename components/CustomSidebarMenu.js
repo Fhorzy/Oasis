@@ -14,18 +14,18 @@ const CustomSidebarMenu = (props) => {
 
   const nama = 'Budi';
   return (
-    <View style={stylesSidebar.sideMenuContainer}>
-      <View style={stylesSidebar.profileHeader}>
-        <View style={stylesSidebar.profileHeaderPicCircle}>
+    <View style={styles.layout}>
+      <View style={styles.profileHeader}>
+        <View style={styles.profileHeaderPicCircle}>
           <Text style={{fontSize: 25, color: '#307ecc'}}>
             {nama.charAt(0)}
           </Text>
         </View>
-        <Text style={stylesSidebar.profileHeaderText}>
+        <Text style={styles.profileHeaderText}>
           {nama}
         </Text>
       </View>
-      <View style={stylesSidebar.profileHeaderLine} />
+      <View style={styles.line} />
 
       <DrawerContentScrollView {...props}>
         <DrawerItemList {...props} />
@@ -66,8 +66,8 @@ const CustomSidebarMenu = (props) => {
 
 export default CustomSidebarMenu;
 
-const stylesSidebar = StyleSheet.create({
-  sideMenuContainer: {
+const styles = StyleSheet.create({
+  layout: {
     width: '100%',
     height: '100%',
     backgroundColor: '#FFF',
@@ -96,7 +96,7 @@ const stylesSidebar = StyleSheet.create({
     paddingHorizontal: 10,
     fontWeight: 'bold',
   },
-  profileHeaderLine: {
+  line: {
     height: 1,
     marginHorizontal: 20,
     backgroundColor: '#e2e2e2',

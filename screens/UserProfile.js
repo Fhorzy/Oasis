@@ -3,9 +3,6 @@ import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import GlobalStyles from '../styles/GlobalStyles';
 
 const ProfileScreen = ({ navigation }) => {
-
-  const nama = "Bambang";
-
   return (
     <View style={GlobalStyles.screenContainer}>
       <View>
@@ -14,21 +11,14 @@ const ProfileScreen = ({ navigation }) => {
 
 
         <Text style={styles.text}>Nama</Text>
-        {/* <Text style={styles.text}> */}
-          {/* {nama} */}
-        {/* </Text> */}
         <Text style={styles.text}>Email</Text>
         <Text style={styles.text}>Password</Text>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.logoutText}>Logout</Text>
+          <Text style={styles.logoutText}>Edit Profile</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
-}
-
-const signOut = () => {
-
 }
 
 const styles = StyleSheet.create({
@@ -45,8 +35,6 @@ const styles = StyleSheet.create({
   editPicture: {
     fontSize: 20,
     alignSelf: "center",
-    // paddingTop: 10,
-    // paddingBottom: 30,
   },
   text: {
     padding: 20,

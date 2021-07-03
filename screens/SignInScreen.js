@@ -1,63 +1,74 @@
 import React, { useState } from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { withNavigation  } from 'react-navigation';
-import SignUpScreen from './SignUpScreen';
-
-import { AuthContext } from '../components/context';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function SignInScreen ({navigation}) {
 
-  // This is for func component
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error_message, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  // This is for class component
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     email: '',
-  //     password: '', 
-  //     confirm_password: '',
-  //   }
-  // }
-
- const validate=() => {
+ const validate = () => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    // const { email, password } = this.state;
+    setErrorMessage('');
 
     if (!email) {
       alert("Please input email");
-      return false;
+      return;
     }
-    else if (reg.test(email) === false) {
+    if (reg.test(email) === false) {
       alert("Invalid email format");
-      return false;
+      return;
     }
-    else if (!password) {
+    if (!password) {
       alert("Please input password");
-      return false;
+      return;
     }
-    else if (password.length < 6) {
+    if (password.length < 6) {
       alert("Password at least 6 characters");
-      return false;
+      return;
     }
-    else
-      return true;
-  }
-  
-// const {signIn} = React.useContext(AuthContext);
 
- const api_call=() => {
-    if (validate()) {
-      alert("Success");
-      navigation.replace('DrawerNavigation');
-      // signIn();
+    setLoading(true);
+    let dataToSend = {email: email, password: password};
+    let formBody = [];
+    for (let key in dataToSend) {
+      let encodedKey = encodeURIComponent(key);
+      let encodedValue = encodeURIComponent(dataToSend[key]);
+      formBody.push(encodedKey + '=' + encodedValue);
     }
+    formBody = formBody.join('&');
+
+    // api
+    fetch('http://oasys.heroku.app/api/credentials/login', {
+      method: 'POST',
+      // body: formBody,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+    })
+    .then((response) => response.json())
+      .then((responseJson) => {
+        setLoading(false);
+        console.log(responseJson);
+        // If api message same as data
+        if (responseJson.status === 'success') {
+          AsyncStorage.setItem('token', responseJson.data.email);
+          console.log(responseJson.data.email);
+          navigation.replace('NavigationScreen');
+        } else {
+          setErrortext(responseJson.msg);
+          console.log('Please check your email or password');
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.error(error);
+      });
   }
-  
-  // render() {
+
   return (
     <View style={styles.container}>
       <View>
@@ -71,11 +82,12 @@ function SignInScreen ({navigation}) {
       <View style={styles.inputLayout}><Text style={styles.textInput}>email</Text></View>
       <View>
       <TextInput
-        autoCapitalize='none'
-        autoCorrect={false}
-        onChangeText={(value)=> setEmail(value)}
-        placeholder={'Email'}
-        style={styles.input}
+        autoCapitalize = 'none'
+        autoCorrect = {false}
+        onChangeText = {(value)=> setEmail(value)}
+        placeholder = {'Email'}
+        style = {styles.input}
+        keyboardType = 'email-address'
       />
       </View>
       
@@ -94,8 +106,7 @@ function SignInScreen ({navigation}) {
         title={'Sign In'}
         color={'green'}
         style={styles.button}
-        onPress={()=>api_call()}
-        // onPress={()=>{signIn()}}
+        onPress={validate}
       /></View>
 
       <Text style={styles.textInput}>New to Oasys?
@@ -103,13 +114,9 @@ function SignInScreen ({navigation}) {
         <Text style={styles.textDesc}>Sign Up</Text>
         </TouchableOpacity>
       </Text>
-      {/* <Text style={styles.textDesc}>
-        forgot password?
-      </Text> */}
     </View>
   );
 }
-// }
 
 const styles = StyleSheet.create({
   layout: {
@@ -155,7 +162,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   container: {
-    alignSelf:'center'
+    alignSelf:'center',
+    paddingTop : 60
   },
 });
 

@@ -16,17 +16,4 @@ const DashboardScreen = ({ navigation }) => {
   );
 }
 
-const styles = StyleSheet.create({
-button: {
-  alignSelf: 'center',
-  width: 150,
-  height: 60,
-  padding: 10,
-  borderWidth: 1,
-  backgroundColor: '#006400',
-  borderColor: 'black',
-  marginTop: 10,
-},
-});
-
 export default DashboardScreen;

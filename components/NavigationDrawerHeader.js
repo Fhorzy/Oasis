@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-import GlobalStyles from '../styles/GlobalStyles';
 
 const NavigationDrawerHeader = (props) => {
     const toggleDrawer = () => {

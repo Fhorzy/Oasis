@@ -14,10 +14,9 @@ const SplashScreen = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
       setAnimating(false);
-      //Check if authToken is set or not
-      //If not then send for Authentication
-      //else send to Home Screen
-      AsyncStorage.getItem('authToken').then((value) =>
+      //Check token, if token exist send to dashboard screen
+      //If not send to auth
+      AsyncStorage.getItem('token').then((value) =>
         navigation.replace(
           value === null ? 'Auth' : 'DrawerNavigationRoutes'
         ),

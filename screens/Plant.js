@@ -3,14 +3,6 @@ import { Text, Button, TextInput, View, StyleSheet, Image, Alert, addons } from 
 import GlobalStyles from '../styles/GlobalStyles';
 
 const PlantScreen = ({ navigation }) => {
-
-  const logout = () => {
-
-  }
-  const changePassword = () => {
-
-  }
-
   return (
     <View style = {GlobalStyles.screenContainer}>
       <Text>
@@ -18,10 +10,6 @@ const PlantScreen = ({ navigation }) => {
       </Text>
     </View>
   );
-}
-
-const logout = () => {
-
 }
 
 const styles = StyleSheet.create({

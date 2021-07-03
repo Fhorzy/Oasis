@@ -1,78 +1,155 @@
 import React, { useState } from 'react';
-import { Text, Button, TextInput, View, StyleSheet, Image, Alert } from 'react-native';
+import { Text, Button, TextInput, View, StyleSheet, Image, ScrollView } from 'react-native';
 
 const SignUpScreen = ({navigation}) => {
 
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     email: '',
-  //     password: '', 
-  //     confirm_password: '',
-  //   }
-  // }
-  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirm_password, setConfirmPassword] = useState('');
+  const [name, setName] = useState('');
+  const [error_message, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [
+    isRegistraionSuccess,
+    setIsRegistraionSuccess
+  ] = useState(false);
+
 
   const validate = () => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    // const { email, password, confirm_password } = this.state;
+    setErrorMessage('');
 
-    if (email == "") {
-      alert("Please input email");
-      return false;
+    if (!name) {
+      alert('Please input name');
+      return;
     }
-    else if (reg.test(email) === false) {
-      alert("Invalid email format");
-      return false;
+    if (!email) {
+      alert('Please input email');
+      return;
     }
-    else if (password == "") {
-      alert("Please input password");
-      return false;
+    if (reg.test(email) === false) {
+      alert('Invalid email format');
+      return;
     }
-    else if (password.length < 6) {
+    if (!password) {
+      alert('Please input password');
+      return;
+    }
+    if (password.length < 6) {
       alert("Password at least 6 characters");
-      return false;
+      return;
     }
-    else if (password !== confirm_password) {
+    if (password !== confirm_password) {
       alert("Password not match");
-      return false;
+      return;
     }
-    else
-      return true;
+
+    setLoading(true);
+    var dataToSend = {
+      name: name,
+      email: email,
+      password: password,
+    };
+
+    var formBody = [];
+    for (var key in dataToSend) {
+      var encodedKey = encodeURIComponent(key);
+      var encodedValue = encodeURIComponent(dataToSend[key]);
+      formBody.push(encodedKey + '=' + encodedValue);
+    }
+    formBody = formBody.join('&');
+    
+    //api
+    fetch('http://oasys.heroku.app/api/credentials/register', {
+      method: 'POST',
+      // body: formBody,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+    })
+    .then((response) => response.json())
+      .then((responseJson) => {
+        setLoading(false);
+        console.log(responseJson);
+        // If api response message equals to success
+        if (responseJson.status === 'success') {
+          setIsRegistraionSuccess(true);
+          console.log(
+            'Registration Successful. Please Login to proceed'
+          );
+        } else {
+          setErrorMessage(responseJson.msg);
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.error(error);
+      });
   }
-
-
-  const api_call = () => {
-    if (validate()) {
-      alert("Success");
-      // this.props.navigation.navigate('DashboardScreen');
-   }
+  
+  if (isRegistraionSuccess) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: '#307ecc',
+          justifyContent: 'center',
+        }}>
+        <Image
+          source={require('../assets/images/user.jpg')}
+          style={{
+            height: 150,
+            resizeMode: 'contain',
+            alignSelf: 'center'
+          }}
+        />
+        <Text style={styles.successTextStyle}>
+          Registration Successful
+        </Text>
+        <TouchableOpacity
+          style={styles.buttonStyle}
+          activeOpacity={0.5}
+          onPress={() => props.navigation.navigate('SignInScreen')}>
+          <Text style={styles.buttonTextStyle}>Login Now</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
 
   // render () {
   return (
     <View style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false} >
       <Image source={require('../assets/images/oasys.png')} style={styles.logo} />
       <Text style={styles.title}>Sign Up To Oasys</Text>
 
+      <Text style = {styles.textInput}>name</Text>
+      <TextInput 
+        autoCapitalize = 'sentences'
+        autoCorrect = {false}
+        onChangeText = {(value) => setName(value)}
+        placeholder = {'Name'}
+        style = {styles.input}
+      />
       <Text style={styles.textInput}>email</Text>
       <TextInput
-        autoCapitalize='none'
-        autoCorrect={false}
-        onChangeText={(value) => setEmail(value)}
-        placeholder={'Email'}
-        style={styles.input}
+        autoCapitalize = 'none'
+        autoCorrect = {false}
+        onChangeText = {(value) => setEmail(value)}
+        placeholder = {'Email'}
+        style = {styles.input}
+        keyboardType = 'email-address'
       />
+
       <Text style={styles.textInput}>password</Text>
       <TextInput
-        onChangeText={(value) => setPassword(value)}
-        placeholder={'Password'}
-        secureTextEntry={true}
-        style={styles.input}
+        onChangeText = {(value) => setPassword(value)}
+        placeholder = {'Password'}
+        secureTextEntry = {true}
+        style = {styles.input}
+        autoCapitalize = 'none'
       />
 
       <Text style={styles.textInput}>confirm password</Text>
@@ -81,21 +158,24 @@ const SignUpScreen = ({navigation}) => {
         placeholder={'Confirm Password'}
         secureTextEntry={true}
         style={styles.input}
+        autoCapitalize = 'none'
       />
 
       <Button
         title={'Sign Up'}
         color={'green'}
         style={styles.button}
-        onPress={() => this.api_call()}
+        onPress={validate}
       />
 
       <Text style={styles.textInput}>Already have an Account?</Text>
       <Text style={styles.textDesc}
         onPress={() => navigation.navigate('SignInScreen')} 
       >Sign In</Text>
+      </ScrollView>
     </View>
-  );}
+  );
+}
 // }
 
 const styles = StyleSheet.create({
@@ -138,7 +218,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   container: {
-    alignSelf:'center'
+    alignSelf:'center',
+    paddingTop : 60
   }
 });
 

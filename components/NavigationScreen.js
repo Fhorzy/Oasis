@@ -2,18 +2,13 @@ import React from 'react';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
-import { FontAwesome5, Feather } from '@expo/vector-icons';
 
-//  Screen
 import DashboardScreen from '../screens/Dashboard';
 import ProfileScreen from '../screens/UserProfile';
 import PlantScreen from '../screens/Plant';
 
-// Components
 import NavigationDrawerHeader from './NavigationDrawerHeader';
 import CustomSidebarMenu from './CustomSidebarMenu';
-
-
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
