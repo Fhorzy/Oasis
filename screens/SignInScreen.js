@@ -106,7 +106,7 @@ function SignInScreen ({navigation}) {
         title={'Sign In'}
         color={'green'}
         style={styles.button}
-        onPress={validate}
+        onPress={() => navigation.navigate('DrawerNavigation')}
       /></View>
 
       <Text style={styles.textInput}>New to Oasys?

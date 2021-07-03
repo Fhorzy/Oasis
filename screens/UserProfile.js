@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import GlobalStyles from '../styles/GlobalStyles';
+import EditProfileScreen from './EditProfileScreen';
 
 const ProfileScreen = ({ navigation }) => {
   return (
@@ -14,7 +15,8 @@ const ProfileScreen = ({ navigation }) => {
         <Text style={styles.text}>Email</Text>
         <Text style={styles.text}>Password</Text>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.logoutText}>Edit Profile</Text>
+          <Text style={GlobalStyles.buttonText} onPress = {() => navigation.navigate('EditProfileStack')}
+          >Edit Profile</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -50,12 +52,6 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     marginBottom: 10,
   },
-  logoutText: {
-    padding: 5,
-    alignSelf: 'center',
-    fontSize: 20,
-    color: '#FFF'
-  }
 });
 
 export default ProfileScreen;
