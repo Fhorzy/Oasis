@@ -18,7 +18,7 @@ const SplashScreen = ({navigation}) => {
       //If not send to auth
       AsyncStorage.getItem('token').then((value) =>
         navigation.replace(
-          value === null ? 'Auth' : 'DrawerNavigationRoutes'
+          value === null ? 'Auth' : 'DrawerNavigation'
         ),
       );
     }, 1000);

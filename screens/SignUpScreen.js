@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, Button, TextInput, View, StyleSheet, Image, ScrollView } from 'react-native';
+import { Text, Button, TextInput, View, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 
 const SignUpScreen = ({navigation}) => {
 
@@ -62,22 +62,23 @@ const SignUpScreen = ({navigation}) => {
     //api
     fetch('http://997f5a4b5fcf.ngrok.io/api/credentials/register', {
       method: 'POST',
-      // body: formBody,
+      body: formBody,
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
       },
     })
     .then((response) => response.json())
       .then((responseJson) => {
         setLoading(false);
-        console.log(responseJson);
+        // console.log(responseJson);
         // If api response message equals to success
-        if (responseJson.status === 'success') {
-          setIsRegistraionSuccess(true);
-          console.log(
-            'Registration Successful. Please Login to proceed'
+        if (responseJson.status === 'OK') {
+          // setIsRegistraionSuccess(true);
+          alert(
+            'Registration Successful. Please Sign In to proceed'
           );
+          navigation.replace('SignInScreen');
         } else {
           setErrorMessage(responseJson.msg);
         }
