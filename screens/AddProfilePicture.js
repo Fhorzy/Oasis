@@ -6,7 +6,7 @@ const AddProfilePicture = () => {
     return (
     <View style = {{alignItems: 'center'}}>
         <Text>
-            ASDASD
+            Buat add profile picture
         </Text>
     </View>
     );

@@ -69,8 +69,8 @@ const DrawerNav = (props) => {
         options = {{drawerLabel: 'Dashboard'}} />
         <Drawer.Screen name = 'profileScreenStack' component = {profileScreenStack} 
         options = {{drawerLabel: 'Profile'}} />
-        <Drawer.Screen name = 'plantScreenStack' component = {plantScreenStack} 
-        options = {{drawerLabel: 'Plant'}} />
+        {/* <Drawer.Screen name = 'plantScreenStack' component = {plantScreenStack}  */}
+        {/* options = {{drawerLabel: 'Plant'}} /> */}
     </Drawer.Navigator>
   );
 }

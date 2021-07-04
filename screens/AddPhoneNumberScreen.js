@@ -6,7 +6,7 @@ const AddPhoneNumber = () => {
     return (
     <View style = {{alignItems: 'center'}}>
         <Text>
-            ASDASD
+            Buat add nomor hp
         </Text>
     </View>
     );

@@ -10,6 +10,11 @@ const DashboardScreen = ({ navigation }) => {
         <Text>
           Ini Dashboard
         </Text>
+        <TouchableOpacity style = {GlobalStyles.button}>
+          <Text style = {GlobalStyles.buttonText}>
+            Auto Pilot
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
 

@@ -60,7 +60,7 @@ const SignUpScreen = ({navigation}) => {
     formBody = formBody.join('&');
     
     //api
-    fetch('http://oasys.heroku.app/api/credentials/register', {
+    fetch('http://997f5a4b5fcf.ngrok.io/api/credentials/register', {
       method: 'POST',
       // body: formBody,
       headers: {

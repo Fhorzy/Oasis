@@ -5,9 +5,10 @@ import { View, Text, TextInput } from 'react-native';
 const AddAddress = () => {
     return (
     <View style = {{alignItems: 'center'}}>
-        <Text>
-            ASDASD
+         <Text>
+            Add Address
         </Text>
+        <TextInput />
     </View>
     );
 }

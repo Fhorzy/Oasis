@@ -41,7 +41,7 @@ function SignInScreen ({navigation}) {
     formBody = formBody.join('&');
 
     // api
-    fetch('http://oasys.heroku.app/api/credentials/login', {
+    fetch('http://997f5a4b5fcf.ngrok.io/api/credentials/login', {
       method: 'POST',
       // body: formBody,
       headers: {
@@ -56,11 +56,11 @@ function SignInScreen ({navigation}) {
         // If api message same as data
         if (responseJson.status === 'success') {
           AsyncStorage.setItem('token', responseJson.data.email);
-          console.log(responseJson.data.email);
+          console.log(responseJson.data.token);
           navigation.replace('NavigationScreen');
         } else {
-          setErrortext(responseJson.msg);
-          console.log('Please check your email or password');
+          setErrorMessage(responseJson.msg);
+          alert('Please check your email or password');
         }
       })
       .catch((error) => {
@@ -107,6 +107,7 @@ function SignInScreen ({navigation}) {
         color={'green'}
         style={styles.button}
         onPress={() => navigation.navigate('DrawerNavigation')}
+        // onPress = {validate}
       /></View>
 
       <Text style={styles.textInput}>New to Oasys?
