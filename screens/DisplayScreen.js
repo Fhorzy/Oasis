@@ -1,36 +1,21 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, { Component } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, Button } from 'react-native';
 
-import SignUpScreen from './SignUpScreen';
-import SignInScreen from './SignInScreen';
-
-// const RootStack = createStackNavigator(
-//     {
-//       SignUpScreen: SignUpScreen,
-//       SignInScreen: SignInScreen,
-//     },
-//     {
-//       initialRouteName: 'SignUpScreen',
-//     }
-//   );
-
-
-
-const Display = () => {
+function DisplayScreen ({navigation}) {
     return (
-        // <RootStack />
-        // <Text>Test</Text>
-        <SignInScreen />
-        // <View style={styles.layout}>
-        //   <Image source={require('../assets/images/oasys.png')} style={styles.logo} />
-        //   <Text style={styles.title}>Welcome To Oasys</Text>
-        //   <View>
-        //     <TouchableOpacity style={styles.button}>
-        //         <Text style={styles.logoutText}>Logout</Text>
-        //     </TouchableOpacity>
-        //   </View>
-        // </View>
+      <View style = {styles.view}>
+        <Image source={require('../assets/images/oasys.png')} style={styles.logo}/>
+        <Text style = {styles.title}>
+          Welcome To Oasys
+        </Text>
+        <TouchableOpacity style = {styles.button} onPress={() => navigation.navigate('SignInScreen')}> 
+          <Text style = {styles.text}> Sign In </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style = {styles.button} onPress={() => navigation.navigate('SignUpScreen')} >
+          <Text style = {styles.text}> Sign Up </Text>
+        </TouchableOpacity>
+      </View>
       );
 }
 
@@ -42,25 +27,30 @@ const styles = StyleSheet.create({
         padding: 30,
     },
     title: {
-        fontSize: 28,
-        paddingTop: 10,
-        paddingBottom: 30,
+      fontSize: 24,
+      alignSelf: 'center',
+      paddingTop: 30,
+    },
+    view: {
+        paddingTop: 60,
     },
     button: {
-        alignSelf: 'center',
-        width: 150,
-        height: 60,
-        padding: 10,
-        borderWidth: 1,
-        backgroundColor: '#006400',
-        borderColor: 'black',
-        marginBottom: 10,
+      alignSelf: 'center',
+      width: 150,
+      height: 60,
+      padding: 10,
+      borderWidth: 1,
+      backgroundColor: '#006400',
+      borderColor: 'black',
+      marginTop: 10,
     },
-    layout: {
-        paddingTop: 10,
-        paddingBottom: 30,
+    text: {
+      padding: 5,
+      alignSelf: 'center',
+      fontSize: 20,
+      color: '#FFF'
     },
 });
 
 
-export default Display;
+export default DisplayScreen;

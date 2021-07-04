@@ -1,60 +1,68 @@
 import React, { useState } from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import registerPage from './SignUpScreen';
-import { AuthContext } from '../components/context';
-import { withNavigation  } from 'react-navigation';
-import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const SignIn = ({navigation}) => {
+function SignInScreen ({navigation}) {
 
-  // This is for func component
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // This is for class component
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     email: '',
-  //     password: '', 
-  //     confirm_password: '',
-  //   }
-  // }
-
- const validate=() => {
+ const validate = () => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const { email, password, confirm_password } = this.state;
 
-    if (email == "") {
+    if (!email) {
       alert("Please input email");
-      return false;
+      return;
     }
-    else if (reg.test(email) === false) {
+    if (reg.test(email) === false) {
       alert("Invalid email format");
-      return false;
+      return;
     }
-    else if (password == "") {
+    if (!password) {
       alert("Please input password");
-      return false;
+      return;
     }
-    else if (password.length < 6) {
+    if (password.length < 6) {
       alert("Password at least 6 characters");
-      return false;
+      return;
     }
-    else
-      return true;
+
+    let dataToSend = {email: email, password: password};
+    let formBody = [];
+    for (let key in dataToSend) {
+      let encodedKey = encodeURIComponent(key);
+      let encodedValue = encodeURIComponent(dataToSend[key]);
+      formBody.push(encodedKey + '=' + encodedValue);
+    }
+    formBody = formBody.join('&');
+
+    // api
+    fetch('http://997f5a4b5fcf.ngrok.io/api/credentials/login', {
+      method: 'POST',
+      body: JSON.stringify(dataToSend),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+    })
+    .then((response) => response.json())
+      .then((response) => {
+        // If api message same as data
+        if (response.status === 'OK') {
+          AsyncStorage.setItem('token', response.data.token);
+          alert(response.data.message);
+          navigation.replace('DrawerNavigation');
+        } else {
+          // Response backend messsage
+          // alert(response.data.message);
+          alert('Please check your email or password');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
- const api_call=() => {
-    if (validate()) {
-      alert("Success");
-      signIn();
-    }
-}
-  // const {signIn} = React.useContext(AuthContext);
-
-  // render() {
   return (
     <View style={styles.container}>
       <View>
@@ -68,11 +76,12 @@ const SignIn = ({navigation}) => {
       <View style={styles.inputLayout}><Text style={styles.textInput}>email</Text></View>
       <View>
       <TextInput
-        autoCapitalize='none'
-        autoCorrect={false}
-        onChangeText={(value)=> setEmail(value)}
-        placeholder={'Email'}
-        style={styles.input}
+        autoCapitalize = 'none'
+        autoCorrect = {false}
+        onChangeText = {(value)=> setEmail(value)}
+        placeholder = {'Email'}
+        style = {styles.input}
+        keyboardType = 'email-address'
       />
       </View>
       
@@ -91,22 +100,17 @@ const SignIn = ({navigation}) => {
         title={'Sign In'}
         color={'green'}
         style={styles.button}
-        // onPress={()=>api_call()}
-        onPress={()=>{signIn()}}
+        onPress = {() => validate()}
       /></View>
 
       <Text style={styles.textInput}>New to Oasys?
-        <TouchableOpacity onPress={() => useNavigation.navigation.navigate()}>
+        <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>
         <Text style={styles.textDesc}>Sign Up</Text>
         </TouchableOpacity>
       </Text>
-      {/* <Text style={styles.textDesc}>
-        forgot password?
-      </Text> */}
     </View>
   );
 }
-// }
 
 const styles = StyleSheet.create({
   layout: {
@@ -152,8 +156,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   container: {
-    alignSelf:'center'
+    alignSelf:'center',
+    paddingTop : 60
   },
 });
 
-export default SignIn;
+export default SignInScreen;

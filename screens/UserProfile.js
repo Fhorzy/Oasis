@@ -1,46 +1,29 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import Screen from './Screen';
+import GlobalStyles from '../styles/GlobalStyles';
+import EditProfileScreen from './EditProfileScreen';
 
 const ProfileScreen = ({ navigation }) => {
-
-  const nama = "Bambang";
-
   return (
-    <View style={styles.container}>
-      <View>
-        <Screen navigation={navigation} name='Profile' />
-      </View>
+    <View style={GlobalStyles.screenContainer}>
       <View>
 
         <Image source={require('../assets/images/user.jpg')} style={styles.profile_picture} />
 
 
         <Text style={styles.text}>Nama</Text>
-        {/* <Text style={styles.text}> */}
-          {/* {nama} */}
-        {/* </Text> */}
         <Text style={styles.text}>Email</Text>
         <Text style={styles.text}>Password</Text>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.logoutText}>Logout</Text>
+          <Text style={GlobalStyles.buttonText} onPress = {() => navigation.navigate('EditProfileStack')}
+          >Edit Profile</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
 
-const signOut = () => {
-
-}
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
   profile_picture: {
     width: 150,
     height: 150,
@@ -54,8 +37,6 @@ const styles = StyleSheet.create({
   editPicture: {
     fontSize: 20,
     alignSelf: "center",
-    // paddingTop: 10,
-    // paddingBottom: 30,
   },
   text: {
     padding: 20,
@@ -71,12 +52,6 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     marginBottom: 10,
   },
-  logoutText: {
-    padding: 5,
-    alignSelf: 'center',
-    fontSize: 20,
-    color: '#FFF'
-  }
 });
 
 export default ProfileScreen;

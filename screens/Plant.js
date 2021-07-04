@@ -1,41 +1,15 @@
 import React from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, Alert, addons } from 'react-native';
-import Screen from './Screen';
+import GlobalStyles from '../styles/GlobalStyles';
 
 const PlantScreen = ({ navigation }) => {
-
-  const logout = () => {
-
-  }
-  const changePassword = () => {
-
-  }
-
   return (
-    <View>
-      <View>
-        <Screen navigation={navigation} name='Plant' />
-      </View>
-      <Image source={require('../assets/images/user.jpg')} style={styles.profile_picture} />
-      <Text style={styles.editPicture}>Edit Picture</Text>
-
-      <Text style={styles.text}>Nama</Text>
-      <Text style={styles.textInput}>Email</Text>
-      <Text style={styles.textInput}>Password</Text>
-      <Button title='Change Password' onPress={() => this.changePassword()} />
-
-      <Button
-        title={'Log Out'}
-        color={'green'}
-        style={styles.button}
-        onPress={() => this.logout()}
-      />
+    <View style = {GlobalStyles.screenContainer}>
+      <Text>
+        Ini Plant
+      </Text>
     </View>
   );
-}
-
-const logout = () => {
-
 }
 
 const styles = StyleSheet.create({
