@@ -6,12 +6,9 @@ function SignInScreen ({navigation}) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error_message, setErrorMessage] = useState('');
-  const [loading, setLoading] = useState(false);
 
  const validate = () => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    setErrorMessage('');
 
     if (!email) {
       alert("Please input email");
@@ -30,8 +27,6 @@ function SignInScreen ({navigation}) {
       return;
     }
 
-    setLoading(true);
-    console.log(password);
     let dataToSend = {email: email, password: password};
     let formBody = [];
     for (let key in dataToSend) {
@@ -44,28 +39,26 @@ function SignInScreen ({navigation}) {
     // api
     fetch('http://997f5a4b5fcf.ngrok.io/api/credentials/login', {
       method: 'POST',
-      body: formBody,
+      body: JSON.stringify(dataToSend),
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
     })
-    .then((response) => response.text())
-      .then((responseJson) => {
-        setLoading(false);
-        // console.log(responseJson);
+    .then((response) => response.json())
+      .then((response) => {
         // If api message same as data
-        if (responseJson.status === 'OK') {
-          AsyncStorage.setItem('token', responseJson.data.token);
-          // console.log(responseJson.data.token);
+        if (response.status === 'OK') {
+          AsyncStorage.setItem('token', response.data.token);
+          alert(response.data.message);
           navigation.replace('DrawerNavigation');
         } else {
-          setErrorMessage(responseJson.msg);
+          // Response backend messsage
+          // alert(response.data.message);
           alert('Please check your email or password');
         }
       })
       .catch((error) => {
-        setLoading(false);
         console.error(error);
       });
   }
@@ -107,8 +100,7 @@ function SignInScreen ({navigation}) {
         title={'Sign In'}
         color={'green'}
         style={styles.button}
-        // onPress={() => navigation.navigate('DrawerNavigation')}
-        onPress = {validate}
+        onPress = {() => validate()}
       /></View>
 
       <Text style={styles.textInput}>New to Oasys?

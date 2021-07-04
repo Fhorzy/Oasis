@@ -7,17 +7,9 @@ const SignUpScreen = ({navigation}) => {
   const [password, setPassword] = useState('');
   const [confirm_password, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
-  const [error_message, setErrorMessage] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [
-    isRegistraionSuccess,
-    setIsRegistraionSuccess
-  ] = useState(false);
-
 
   const validate = () => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    setErrorMessage('');
 
     if (!name) {
       alert('Please input name');
@@ -44,7 +36,6 @@ const SignUpScreen = ({navigation}) => {
       return;
     }
 
-    setLoading(true);
     var dataToSend = {
       name: name,
       email: email,
@@ -62,25 +53,22 @@ const SignUpScreen = ({navigation}) => {
     //api
     fetch('http://997f5a4b5fcf.ngrok.io/api/credentials/register', {
       method: 'POST',
-      body: formBody,
+      body: JSON.stringify(formBody),
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
       },
     })
     .then((response) => response.json())
-      .then((responseJson) => {
-        setLoading(false);
-        // console.log(responseJson);
+      .then((response) => {
         // If api response message equals to success
-        if (responseJson.status === 'OK') {
-          // setIsRegistraionSuccess(true);
-          alert(
-            'Registration Successful. Please Sign In to proceed'
-          );
+        if (response.status === 'OK') {
+          alert(response.data.message);
           navigation.replace('SignInScreen');
         } else {
-          setErrorMessage(responseJson.msg);
+          // Response message backend
+          // alert(response.data.message);
+          alert('Failed to create account');
         }
       })
       .catch((error) => {
@@ -89,34 +77,34 @@ const SignUpScreen = ({navigation}) => {
       });
   }
   
-  if (isRegistraionSuccess) {
-    return (
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: '#307ecc',
-          justifyContent: 'center',
-        }}>
-        <Image
-          source={require('../assets/images/user.jpg')}
-          style={{
-            height: 150,
-            resizeMode: 'contain',
-            alignSelf: 'center'
-          }}
-        />
-        <Text style={styles.successTextStyle}>
-          Registration Successful
-        </Text>
-        <TouchableOpacity
-          style={styles.buttonStyle}
-          activeOpacity={0.5}
-          onPress={() => props.navigation.navigate('SignInScreen')}>
-          <Text style={styles.buttonTextStyle}>Login Now</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+  // if (isRegistraionSuccess) {
+  //   return (
+  //     <View
+  //       style={{
+  //         flex: 1,
+  //         backgroundColor: '#307ecc',
+  //         justifyContent: 'center',
+  //       }}>
+  //       <Image
+  //         source={require('../assets/images/user.jpg')}
+  //         style={{
+  //           height: 150,
+  //           resizeMode: 'contain',
+  //           alignSelf: 'center'
+  //         }}
+  //       />
+  //       <Text style={styles.successTextStyle}>
+  //         Registration Successful
+  //       </Text>
+  //       <TouchableOpacity
+  //         style={styles.buttonStyle}
+  //         activeOpacity={0.5}
+  //         onPress={() => props.navigation.navigate('SignInScreen')}>
+  //         <Text style={styles.buttonTextStyle}>Login Now</Text>
+  //       </TouchableOpacity>
+  //     </View>
+  //   );
+  // }
 
   // render () {
   return (
