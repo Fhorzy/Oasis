@@ -51,7 +51,7 @@ const SignUpScreen = ({navigation}) => {
     formBody = formBody.join('&');
     
     //api
-    fetch('http://997f5a4b5fcf.ngrok.io/api/credentials/register', {
+    fetch('http://0999cee3977d.ngrok.io/api/credentials/register', {
       method: 'POST',
       body: JSON.stringify(formBody),
       headers: {
@@ -67,46 +67,15 @@ const SignUpScreen = ({navigation}) => {
           navigation.replace('SignInScreen');
         } else {
           // Response message backend
-          // alert(response.data.message);
-          alert('Failed to create account');
+          alert(response.data.message);
+          // alert('Failed to create account');
         }
       })
       .catch((error) => {
-        setLoading(false);
         console.error(error);
       });
   }
-  
-  // if (isRegistraionSuccess) {
-  //   return (
-  //     <View
-  //       style={{
-  //         flex: 1,
-  //         backgroundColor: '#307ecc',
-  //         justifyContent: 'center',
-  //       }}>
-  //       <Image
-  //         source={require('../assets/images/user.jpg')}
-  //         style={{
-  //           height: 150,
-  //           resizeMode: 'contain',
-  //           alignSelf: 'center'
-  //         }}
-  //       />
-  //       <Text style={styles.successTextStyle}>
-  //         Registration Successful
-  //       </Text>
-  //       <TouchableOpacity
-  //         style={styles.buttonStyle}
-  //         activeOpacity={0.5}
-  //         onPress={() => props.navigation.navigate('SignInScreen')}>
-  //         <Text style={styles.buttonTextStyle}>Login Now</Text>
-  //       </TouchableOpacity>
-  //     </View>
-  //   );
-  // }
 
-  // render () {
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}

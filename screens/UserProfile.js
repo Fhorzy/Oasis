@@ -1,9 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import GlobalStyles from '../styles/GlobalStyles';
 import EditProfileScreen from './EditProfileScreen';
 
-const ProfileScreen = ({ navigation }) => {
+function ProfileScreen ({ navigation }) {
+  const [data, setData] = useState('');
+  
+  useEffect(() => {
+    async function fetchApi() {
+      let response = await fetch('http://0999cee3977d.ngrok.io/api/profile', {
+        method: 'GET',
+        headers: {
+        Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + await AsyncStorage.getItem('token')
+        },
+      })
+      response = await response.json()
+      setData(response)
+    }
+    
+    fetchApi()
+  }, [])
+
   return (
     <View style={GlobalStyles.screenContainer}>
       <View>
@@ -11,11 +31,12 @@ const ProfileScreen = ({ navigation }) => {
         <Image source={require('../assets/images/user.jpg')} style={styles.profile_picture} />
 
 
-        <Text style={styles.text}>Nama</Text>
-        <Text style={styles.text}>Email</Text>
-        <Text style={styles.text}>Password</Text>
+        <Text style={styles.text}>{data.data.user_info.name}</Text>
+        <Text style={styles.text}>{data.data.user_info.email}</Text>
         <TouchableOpacity style={styles.button}>
-          <Text style={GlobalStyles.buttonText} onPress = {() => navigation.navigate('EditProfileStack')}
+          <Text style={GlobalStyles.buttonText} 
+          onPress = {() => navigation.navigate('EditProfileStack')}
+          // onPress = {apiCall}
           >Edit Profile</Text>
         </TouchableOpacity>
       </View>

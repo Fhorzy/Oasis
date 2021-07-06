@@ -37,7 +37,7 @@ function SignInScreen ({navigation}) {
     formBody = formBody.join('&');
 
     // api
-    fetch('http://997f5a4b5fcf.ngrok.io/api/credentials/login', {
+    fetch('http://0999cee3977d.ngrok.io/api/credentials/login', {
       method: 'POST',
       body: JSON.stringify(dataToSend),
       headers: {
@@ -54,8 +54,8 @@ function SignInScreen ({navigation}) {
           navigation.replace('DrawerNavigation');
         } else {
           // Response backend messsage
-          // alert(response.data.message);
-          alert('Please check your email or password');
+          alert(response.data.message);
+          // alert('Please check your email or password');
         }
       })
       .catch((error) => {
@@ -100,7 +100,7 @@ function SignInScreen ({navigation}) {
         title={'Sign In'}
         color={'green'}
         style={styles.button}
-        onPress = {() => validate()}
+        onPress = {validate}
       /></View>
 
       <Text style={styles.textInput}>New to Oasys?
