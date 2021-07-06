@@ -20,12 +20,12 @@ const EditProfileScreen = (props) => {
             </TouchableOpacity>
             <TouchableOpacity style = {GlobalStyles.button} onPress = {() => props.navigation.navigate('AddPhoneNumberScreen')}>
                 <Text style = {GlobalStyles.buttonText}>
-                    Add Phone Number
+                    Add / Edit Phone Number
                 </Text>
             </TouchableOpacity>
             <TouchableOpacity style = {GlobalStyles.button} onPress = {() => props.navigation.navigate('AddAddressScreen')}>
                 <Text style = {GlobalStyles.buttonText}>
-                    Add Address
+                    Add / Edit Address
                 </Text>
             </TouchableOpacity>
             <TouchableOpacity style = {GlobalStyles.button} onPress = {() => props.navigation.navigate('ChangePasswordScreen')}>
