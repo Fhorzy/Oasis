@@ -19,7 +19,7 @@ function AddAddress ({navigation}) {
         }
 
         // api
-        fetch('http://0999cee3977d.ngrok.io/api/profile/edit/address', {
+        fetch('http://7f094cc35177.ngrok.io/api/profile/edit/address', {
             method: 'POST',
             body: {address: address},
             headers: {

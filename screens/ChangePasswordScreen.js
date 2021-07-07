@@ -34,7 +34,7 @@ function ChangePassword ({navigation}) {
         }
 
         // api
-        fetch('http://0999cee3977d.ngrok.io/api/credentials/edit/password', {
+        fetch('http://7f094cc35177.ngrok.io/api/credentials/edit/password', {
             method: 'PUT',
             body: JSON.stringify({old_password: password, new_password: new_password}),
             headers: {

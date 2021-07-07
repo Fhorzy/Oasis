@@ -3,14 +3,47 @@ import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import GlobalStyles from '../styles/GlobalStyles';
 
+function EditProfileScreen (props) {
 
-const deactivateAccount = ({navigation}) => {
-    AsyncStorage.clear();
-    alert('Success');
-    navigation.replace('Auth');
-}
+  const apiCall = async () => {
+    if(!image) {
+        alert('Please input image');
+    }
 
-const EditProfileScreen = (props) => {
+    let keys;
+    try {
+      keys = await AsyncStorage.getItem('token');
+    } catch(error) {
+        console.log(error);
+    }
+
+    // api
+    fetch('http://7f094cc35177.ngrok.io/api/credentials/de-actived', {
+        method: 'DELETE',
+        body: {'agree' : 'true'},
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + keys
+        },
+    })
+    .then((response) => response.text())
+        .then((response) => {
+            console.log(response);
+        // If api message same as data
+        if (response.status == 200) {
+            AsyncStorage.clear();
+            alert(response.data.message);
+            navigation.replace('Auth');
+          } else {
+            alert(response.data.message);
+        }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
     return (
         <View style = {{alignItems: 'center'}}>
             <TouchableOpacity style = {GlobalStyles.button} onPress = {() => props.navigation.navigate('AddProfilePictureScreen')}>
@@ -48,7 +81,7 @@ const EditProfileScreen = (props) => {
                     {
                       text: 'Confirm',
                       onPress: () => {
-                        deactivateAccount(props);
+                        apiCall(props);
                       },
                     },
                   ],
