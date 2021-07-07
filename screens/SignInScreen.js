@@ -37,7 +37,7 @@ function SignInScreen ({navigation}) {
     formBody = formBody.join('&');
 
     // api
-    fetch('http://0999cee3977d.ngrok.io/api/credentials/login', {
+    fetch('http://7f094cc35177.ngrok.io/api/credentials/login', {
       method: 'POST',
       body: JSON.stringify(dataToSend),
       headers: {

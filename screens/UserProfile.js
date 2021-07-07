@@ -13,7 +13,7 @@ function ProfileScreen ({ navigation }) {
   useEffect(() => {
     async function fetchApi() {
       setLoading(true);
-      let response = await fetch('http://0999cee3977d.ngrok.io/api/profile', {
+      let response = await fetch('http://7f094cc35177.ngrok.io/api/profile', {
         method: 'GET',
         headers: {
         Accept: 'application/json',
@@ -26,6 +26,7 @@ function ProfileScreen ({ navigation }) {
         setLoading(false);
         response = await response.json();
         // setData(response);
+        console.log(response);
         setName(response.data.user_info.name);
         setEmail(response.data.user_info.email);
         setAvatar(response.data.user_info.avatar);
