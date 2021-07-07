@@ -5,9 +5,16 @@ import GlobalStyles from '../styles/GlobalStyles';
 const PlantScreen = ({ navigation }) => {
   return (
     <View style = {GlobalStyles.screenContainer}>
-      <Text>
-        Ini Plant
-      </Text>
+      <View style = {{margin : 20}}>
+                <Text style = {styles.textHeaderStyle}>Tanaman 1</Text>
+                <View style = {{flexDirection : 'row'}}>
+                    <Image style = {styles.imageStyle} source = {require('../../assets/images/oasys.png')}/>
+                    <View style = {{justifyContent : 'center'}}>
+                        <Text style = {styles.textContentStyle}>Temparature</Text>
+                        <Text style = {styles.textContentStyle}>Time</Text>
+                    </View>
+                </View>
+            </View>
     </View>
   );
 }
@@ -37,6 +44,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#00FF00',
     marginBottom: 10,
   },
+  //My Own Style
+  imageStyle : {
+    width : 120,
+    height : 120,
+    alignItems : 'center',
+    borderRadius : 80,   
+    },
+
+    textHeaderStyle : {
+        fontSize : 24,
+        alignSelf : 'center'
+    },
+    textContentStyle : {
+        fontSize : 18,
+        marginLeft : 50
+    }
 });
 
 export default PlantScreen;
