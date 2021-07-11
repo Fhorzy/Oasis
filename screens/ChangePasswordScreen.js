@@ -46,7 +46,7 @@ function ChangePassword ({navigation}) {
         .then((response) => response.json())
             .then((response) => {
             // If api message same as data
-            if (response.status === 'OK') {
+            if (response.code == 200) {
                 alert(response.data.message);
                 navigation.replace('ProfileScreen');
             } else {

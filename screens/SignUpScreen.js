@@ -62,7 +62,7 @@ const SignUpScreen = ({navigation}) => {
     .then((response) => response.json())
       .then((response) => {
         // If api response message equals to success
-        if (response.status === 'OK') {
+        if (response.code == 200) {
           alert(response.data.message);
           navigation.replace('SignInScreen');
         } else {

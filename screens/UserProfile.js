@@ -4,7 +4,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import GlobalStyles from '../styles/GlobalStyles';
 
 function ProfileScreen ({ navigation }) {
-  const [data, setData] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [avatar, setAvatar] = useState('');
@@ -13,7 +12,7 @@ function ProfileScreen ({ navigation }) {
   useEffect(() => {
     async function fetchApi() {
       setLoading(true);
-      let response = await fetch('http://7f094cc35177.ngrok.io/api/profile', {
+      let response = await fetch('http://40e2a20e0576.ngrok.io/api/profile', {
         method: 'GET',
         headers: {
         Accept: 'application/json',
@@ -25,11 +24,10 @@ function ProfileScreen ({ navigation }) {
       try {
         setLoading(false);
         response = await response.json();
-        // setData(response);
-        console.log(response);
         setName(response.data.user_info.name);
         setEmail(response.data.user_info.email);
         setAvatar(response.data.user_info.avatar);
+        console.log(response);
       } catch (error) {
           setLoading(false);
           console.log(error);
@@ -48,14 +46,19 @@ function ProfileScreen ({ navigation }) {
             {name.charAt(0)}
         </Text>
       </View> : <Image source={require('../assets/images/user.jpg')} style={styles.profile_picture} /> }
-        <Text style={styles.textDescription}>Name     :</Text>
+
+      <View style = {{flexDirection: 'row'}}>
+        <Text style={styles.textDescription}>Name     :  </Text>
         <Text style={styles.text}>{name}</Text>
-        <Text style={styles.textDescription}>Email      :</Text>
+      </View>
+
+      <View style = {{flexDirection: 'row'}}>
+        <Text style={styles.textDescription}>Email      :  </Text>
         <Text style={styles.text}>{email}</Text>
+      </View>
         <TouchableOpacity style={styles.button}>
           <Text style={GlobalStyles.buttonText} 
           onPress = {() => navigation.navigate('EditProfileStack')}
-          // onPress = {apiCall}
           >Edit Profile</Text>
         </TouchableOpacity>
       </View>
@@ -79,9 +82,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   text: {
-    padding: 20,
     fontSize: 20,
-    marginLeft: 90
+    paddingTop: 30
   },
   textDescription: {
     fontSize: 20,

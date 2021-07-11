@@ -6,10 +6,6 @@ import GlobalStyles from '../styles/GlobalStyles';
 function EditProfileScreen (props) {
 
   const apiCall = async () => {
-    if(!image) {
-        alert('Please input image');
-    }
-
     let keys;
     try {
       keys = await AsyncStorage.getItem('token');
@@ -18,23 +14,24 @@ function EditProfileScreen (props) {
     }
 
     // api
-    fetch('http://7f094cc35177.ngrok.io/api/credentials/de-actived', {
+    fetch('http://9b0d2c83c6eb.ngrok.io/api/credentials/de-actived', {
         method: 'DELETE',
-        body: {'agree' : 'true'},
+        body: {agree: 'true'},
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + keys
         },
     })
-    .then((response) => response.text())
+    .then((response) => response.json())
         .then((response) => {
-            console.log(response);
+            // console.log(response);
         // If api message same as data
-        if (response.status == 200) {
+        if (response.code == 200) {
             AsyncStorage.clear();
             alert(response.data.message);
-            navigation.replace('Auth');
+            // console.log(response);
+            props.navigation.replace('Auth');
           } else {
             alert(response.data.message);
         }

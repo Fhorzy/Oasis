@@ -37,7 +37,7 @@ function SignInScreen ({navigation}) {
     formBody = formBody.join('&');
 
     // api
-    fetch('http://7f094cc35177.ngrok.io/api/credentials/login', {
+    fetch('http://40e2a20e0576.ngrok.io/api/credentials/login', {
       method: 'POST',
       body: JSON.stringify(dataToSend),
       headers: {
@@ -48,7 +48,7 @@ function SignInScreen ({navigation}) {
     .then((response) => response.json())
       .then((response) => {
         // If api message same as data
-        if (response.status === 'OK') {
+        if (response.code == 200) {
           AsyncStorage.setItem('token', response.data.token);
           alert(response.data.message);
           navigation.replace('DrawerNavigation');

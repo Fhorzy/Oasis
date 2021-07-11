@@ -1,20 +1,25 @@
 import React from 'react';
-import { Text, Button, TextInput, View, StyleSheet, Image, Alert, addons } from 'react-native';
+import { Text, TouchableOpacity, TextInput, View, StyleSheet, Image, Alert, addons } from 'react-native';
 import GlobalStyles from '../styles/GlobalStyles';
 
 const PlantScreen = ({ navigation }) => {
   return (
     <View style = {GlobalStyles.screenContainer}>
       <View style = {{margin : 20}}>
-                <Text style = {styles.textHeaderStyle}>Tanaman 1</Text>
-                <View style = {{flexDirection : 'row'}}>
-                    <Image style = {styles.imageStyle} source = {require('../../assets/images/oasys.png')}/>
-                    <View style = {{justifyContent : 'center'}}>
-                        <Text style = {styles.textContentStyle}>Temparature</Text>
-                        <Text style = {styles.textContentStyle}>Time</Text>
-                    </View>
-                </View>
-            </View>
+        <TouchableOpacity style = {{width:150, alignSelf: 'flex-end', backgroundColor: '#006400', marginBottom: 30}}>
+          <Text style = {GlobalStyles.buttonText}>Get status</Text>
+        </TouchableOpacity>
+        <Text style = {styles.textHeaderStyle}>Tanaman 1</Text>
+
+        <View style = {{flexDirection : 'row'}}>
+          <Image style = {styles.imageStyle} source = {require('../assets/images/oasys.png')}/>
+          <View style = {{justifyContent : 'center'}}>
+            <Text style = {styles.textContentStyle}>Temparature</Text>
+            <Text style = {styles.textContentStyle}>Time</Text>
+          </View>
+        </View>
+
+      </View>
     </View>
   );
 }
