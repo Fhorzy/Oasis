@@ -12,7 +12,7 @@ function ProfileScreen ({ navigation }) {
   useEffect(() => {
     async function fetchApi() {
       setLoading(true);
-      let response = await fetch('http://40e2a20e0576.ngrok.io/api/profile', {
+      let response = await fetch('http://192.168.1.10:3000/api/profile', {
         method: 'GET',
         headers: {
         Accept: 'application/json',
@@ -26,26 +26,53 @@ function ProfileScreen ({ navigation }) {
         response = await response.json();
         setName(response.data.user_info.name);
         setEmail(response.data.user_info.email);
-        setAvatar(response.data.user_info.avatar);
+        // setAvatar(response.data.user_info.avatar);
         console.log(response);
+    // console.log(avatar.slice(-4));
+// console.log(avatar);
       } catch (error) {
           setLoading(false);
           console.log(error);
       }
     }
-    
-    fetchApi()
+    // /api/profile/download/avatar/:name
+    // avatar.slice(-4) == null ? fetchProfilePic() : setAvatar();
+    fetchApi();
+    // getProfileAvatar();
   }, [])
+
+  const getProfileAvatar = async() => {
+      fetch ('http://192.168.1.10:3000/api/profile/download/avatar/1-profile_avatar-user.jpg', {
+        method: 'GET',
+        headers: {
+        Accept: 'application/json',
+          // 'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + await AsyncStorage.getItem('token')
+        },
+      })
+      .then((response) => response.json())
+      .then((response) => {
+        setAvatar(response.data.file);
+        console.log(response);
+        // console.log(avatar);
+        // console.log(avatar);
+      })
+      // );
+  }
 
   return (
     <ScrollView style={GlobalStyles.screenContainer}>
       <View>
-      {avatar === null ? 
+      {/* {avatar.slice(-4) == null ? */}
+      {/* {avatar && <Image source={{ uri: avatar }} style={styles.profile_picture} />} */}
+      {/* { name !== null ?  */}
       <View style={styles.profileHeaderPicCircle}>
         <Text style={{fontSize: 72, color: '#ffffff', alignSelf: 'center'}}>
             {name.charAt(0)}
         </Text>
-      </View> : <Image source={require('../assets/images/user.jpg')} style={styles.profile_picture} /> }
+      {/* </View> : <Image style={styles.profile_picture} source = {getProfileAvatar} /> } */}
+      </View> 
+      {/* : <Image source = {{uri: avatar}} style={styles.profile_picture} /> } */}
 
       <View style = {{flexDirection: 'row'}}>
         <Text style={styles.textDescription}>Name     :  </Text>

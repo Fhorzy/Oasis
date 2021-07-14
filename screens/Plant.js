@@ -2,11 +2,17 @@ import React from 'react';
 import { Text, TouchableOpacity, TextInput, View, StyleSheet, Image, Alert, addons } from 'react-native';
 import GlobalStyles from '../styles/GlobalStyles';
 
-const PlantScreen = ({ navigation }) => {
+function PlantScreen ({ navigation }) {
+
+  const apiCall = () => {
+
+  }
+
   return (
     <View style = {GlobalStyles.screenContainer}>
       <View style = {{margin : 20}}>
-        <TouchableOpacity style = {{width:150, alignSelf: 'flex-end', backgroundColor: '#006400', marginBottom: 30}}>
+        <TouchableOpacity style = {{width:150, alignSelf: 'flex-end', backgroundColor: '#006400', 
+        marginBottom: 30}} onPress = {apiCall}>
           <Text style = {GlobalStyles.buttonText}>Get status</Text>
         </TouchableOpacity>
         <Text style = {styles.textHeaderStyle}>Tanaman 1</Text>

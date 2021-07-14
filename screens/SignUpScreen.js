@@ -51,7 +51,7 @@ const SignUpScreen = ({navigation}) => {
     formBody = formBody.join('&');
     
     //api
-    fetch('http://7f094cc35177.ngrok.io/api/credentials/register', {
+    fetch('http://192.168.1.10:3000/api/credentials/register', {
       method: 'POST',
       body: JSON.stringify(formBody),
       headers: {
