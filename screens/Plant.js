@@ -1,11 +1,23 @@
 import React from 'react';
 import { Text, TouchableOpacity, TextInput, View, StyleSheet, Image, Alert, addons } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import GlobalStyles from '../styles/GlobalStyles';
 
 function PlantScreen ({ navigation }) {
 
-  const apiCall = () => {
-
+  const apiCall = async() => {
+    fetch('http://192.168.1.10:3000/api/plants/status', {
+        method: 'GET',
+        headers: {
+        Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + await AsyncStorage.getItem('token')
+        },
+    })
+    .then((response) => response.json())
+    .then((response) => {
+      console.log(response);
+    })
   }
 
   return (

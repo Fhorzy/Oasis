@@ -36,7 +36,7 @@ const uploadImage = async() => {
   try {
     const form = new FormData();
     form.append('profile_avatar', {
-      name: 'user.jpg',
+      name: Date.now() + '.jpg',
       uri: image.uri,
       type: 'image/jpg'
     });
