@@ -15,7 +15,8 @@ const CustomSidebarMenu = (props) => {
   const nama = 'Budi';
   return (
     <View style={styles.layout}>
-      <View style={styles.profileHeader}>
+      {/* Masih mencari cara untuk narik api GET UserProfile buat dapat nama dan avatar */}
+      {/* <View style={styles.profileHeader}>
         <View style={styles.profileHeaderPicCircle}>
           <Text style={{fontSize: 25, color: '#307ecc'}}>
             {nama.charAt(0)}
@@ -24,7 +25,7 @@ const CustomSidebarMenu = (props) => {
         <Text style={styles.profileHeaderText}>
           {nama}
         </Text>
-      </View>
+      </View> */}
       <View style={styles.line} />
 
       <DrawerContentScrollView {...props}>

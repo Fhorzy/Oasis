@@ -3,14 +3,44 @@ import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import GlobalStyles from '../styles/GlobalStyles';
 
+function EditProfileScreen (props) {
 
-const deactivateAccount = ({navigation}) => {
-    AsyncStorage.clear();
-    alert('Success');
-    navigation.replace('Auth');
-}
+  const apiCall = async () => {
+    let keys;
+    try {
+      keys = await AsyncStorage.getItem('token');
+    } catch(error) {
+        console.log(error);
+    }
 
-const EditProfileScreen = (props) => {
+    // api
+    fetch('http://192.168.1.10:3000/api/credentials/de-actived', {
+        method: 'DELETE',
+        body: JSON.stringify({agree: true}),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + keys
+        },
+    })
+    .then((response) => response.json())
+        .then((response) => {
+            // console.log(response);
+        // If api message same as data
+        if (response.code == 200) {
+            AsyncStorage.clear();
+            alert(response.data.message);
+            console.log(response);
+            props.navigation.replace('Auth');
+          } else {
+            alert(response.data.message);
+        }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
     return (
         <View style = {{alignItems: 'center'}}>
             <TouchableOpacity style = {GlobalStyles.button} onPress = {() => props.navigation.navigate('AddProfilePictureScreen')}>
@@ -20,12 +50,12 @@ const EditProfileScreen = (props) => {
             </TouchableOpacity>
             <TouchableOpacity style = {GlobalStyles.button} onPress = {() => props.navigation.navigate('AddPhoneNumberScreen')}>
                 <Text style = {GlobalStyles.buttonText}>
-                    Add Phone Number
+                    Add / Edit Phone Number
                 </Text>
             </TouchableOpacity>
             <TouchableOpacity style = {GlobalStyles.button} onPress = {() => props.navigation.navigate('AddAddressScreen')}>
                 <Text style = {GlobalStyles.buttonText}>
-                    Add Address
+                    Add / Edit Address
                 </Text>
             </TouchableOpacity>
             <TouchableOpacity style = {GlobalStyles.button} onPress = {() => props.navigation.navigate('ChangePasswordScreen')}>
@@ -48,7 +78,7 @@ const EditProfileScreen = (props) => {
                     {
                       text: 'Confirm',
                       onPress: () => {
-                        deactivateAccount(props);
+                        apiCall(props)
                       },
                     },
                   ],

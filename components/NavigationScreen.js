@@ -4,8 +4,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import DashboardScreen from '../screens/Dashboard';
-import ProfileScreen from '../screens/UserProfile';
-import PlantScreen from '../screens/Plant';
+import ProfileScreen from '../screens/ProfileScreen';
+import PlantScreen from '../screens/PlantScreen';
 import AddProfilePictureScreen from '../screens/AddProfilePicture';
 import AddPhoneNumberScreen from '../screens/AddPhoneNumberScreen';
 import AddAddressScreen from '../screens/AddAddressScreen';
@@ -65,12 +65,13 @@ const plantScreenStack = ({navigation}) => {
 const DrawerNav = (props) => {
   return (
     <Drawer.Navigator screenOptions = {{headerShown: false}} drawerContent = {CustomSidebarMenu}>
-      <Drawer.Screen name = 'dashboardScreenStack' component = {dashboardScreenStack} 
-        options = {{drawerLabel: 'Dashboard'}} />
+      {/* <Drawer.Screen name = 'dashboardScreenStack' component = {dashboardScreenStack} 
+        options = {{drawerLabel: 'Dashboard'}} /> */}
+        <Drawer.Screen name = 'plantScreenStack' component = {plantScreenStack} 
+        options = {{drawerLabel: 'Plant'}} />
         <Drawer.Screen name = 'profileScreenStack' component = {profileScreenStack} 
         options = {{drawerLabel: 'Profile'}} />
-        {/* <Drawer.Screen name = 'plantScreenStack' component = {plantScreenStack}  */}
-        {/* options = {{drawerLabel: 'Plant'}} /> */}
+      
     </Drawer.Navigator>
   );
 }
