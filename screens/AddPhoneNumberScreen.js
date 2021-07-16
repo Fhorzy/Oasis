@@ -19,7 +19,7 @@ function AddPhoneNumber ({navigation}) {
         }
 
         // api
-        fetch('http://7f094cc35177.ngrok.io/api/profile/edit/phone_number', {
+        fetch('http://192.168.1.10:3000/api/profile/edit/phone_number', {
             method: 'POST',
             body: {phone_number: phone_number},
             headers: {

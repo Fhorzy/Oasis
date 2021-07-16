@@ -14,9 +14,9 @@ function EditProfileScreen (props) {
     }
 
     // api
-    fetch('http://9b0d2c83c6eb.ngrok.io/api/credentials/de-actived', {
+    fetch('http://192.168.1.10:3000/api/credentials/de-actived', {
         method: 'DELETE',
-        body: {agree: 'true'},
+        body: JSON.stringify({agree: true}),
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ function EditProfileScreen (props) {
         if (response.code == 200) {
             AsyncStorage.clear();
             alert(response.data.message);
-            // console.log(response);
+            console.log(response);
             props.navigation.replace('Auth');
           } else {
             alert(response.data.message);
@@ -78,7 +78,7 @@ function EditProfileScreen (props) {
                     {
                       text: 'Confirm',
                       onPress: () => {
-                        apiCall(props);
+                        apiCall(props)
                       },
                     },
                   ],

@@ -28,7 +28,6 @@ function ProfileScreen ({ navigation }) {
           setName(response.data.user_info.name);
           setEmail(response.data.user_info.email);
           setAvatar(response.data.user_info.avatar);
-          console.log(response);
         })
       } catch (error) {
         setLoading(false);
