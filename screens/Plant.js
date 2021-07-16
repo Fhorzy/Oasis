@@ -3,25 +3,15 @@ import { Text, TouchableOpacity, TextInput, View, StyleSheet, Image, Alert, addo
 import GlobalStyles from '../styles/GlobalStyles';
 
 const PlantScreen = ({ navigation }) => {
+ 
   return (
-    <View style = {GlobalStyles.screenContainer}>
-      <View style = {{margin : 20}}>
-        <TouchableOpacity style = {{width:150, alignSelf: 'flex-end', backgroundColor: '#006400', marginBottom: 30}}>
-          <Text style = {GlobalStyles.buttonText}>Get status</Text>
-        </TouchableOpacity>
-        <Text style = {styles.textHeaderStyle}>Tanaman 1</Text>
-
-        <View style = {{flexDirection : 'row'}}>
-          <Image style = {styles.imageStyle} source = {require('../assets/images/oasys.png')}/>
-          <View style = {{justifyContent : 'center'}}>
-            <Text style = {styles.textContentStyle}>Temparature</Text>
-            <Text style = {styles.textContentStyle}>Time</Text>
-          </View>
-        </View>
-
-      </View>
+    <View>
+        {/* Nanti Value nya di ganti objek di API yang mau kita masukan */}
+        <Plantdetail title = "tanaman 1" temperature = "20" humidity = "78" time = "15 : 30"/>
+        <Plantdetail title = "tanaman 2" temperature = "21" humidity = "66" time = "15 : 30"/>
+        <Plantdetail title = "tanaman 3" temperature = "21" humidity = "66" time = "15 : 30"/>
     </View>
-  );
+);
 }
 
 const styles = StyleSheet.create({
