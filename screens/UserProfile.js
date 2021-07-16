@@ -12,40 +12,42 @@ function ProfileScreen ({ navigation }) {
   useEffect(() => {
     async function fetchApi() {
       setLoading(true);
-      let response = await fetch('http://40e2a20e0576.ngrok.io/api/profile', {
-        method: 'GET',
-        headers: {
-        Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + await AsyncStorage.getItem('token')
-        },
-      })
 
       try {
-        setLoading(false);
-        response = await response.json();
-        setName(response.data.user_info.name);
-        setEmail(response.data.user_info.email);
-        setAvatar(response.data.user_info.avatar);
-        console.log(response);
-      } catch (error) {
+        await fetch('http://192.168.1.10:3000/api/profile', {
+          method: 'GET',
+          headers: {
+          Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + await AsyncStorage.getItem('token')
+          },
+        })
+        .then((response) => response.json())
+        .then((response) => {
           setLoading(false);
-          console.log(error);
+          setName(response.data.user_info.name);
+          setEmail(response.data.user_info.email);
+          setAvatar(response.data.user_info.avatar);
+          console.log(response);
+        })
+      } catch (error) {
+        setLoading(false);
+        console.log(error);
       }
     }
-    
-    fetchApi()
+    fetchApi();
   }, [])
 
   return (
     <ScrollView style={GlobalStyles.screenContainer}>
       <View>
-      {avatar === null ? 
+      
+      {avatar.slice(-4) === "null" ?
       <View style={styles.profileHeaderPicCircle}>
         <Text style={{fontSize: 72, color: '#ffffff', alignSelf: 'center'}}>
             {name.charAt(0)}
         </Text>
-      </View> : <Image source={require('../assets/images/user.jpg')} style={styles.profile_picture} /> }
+      </View> : <Image source = {{uri: avatar}} style={styles.profile_picture} /> }
 
       <View style = {{flexDirection: 'row'}}>
         <Text style={styles.textDescription}>Name     :  </Text>

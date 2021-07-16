@@ -1,17 +1,54 @@
 import React from 'react';
 import { Text, TouchableOpacity, TextInput, View, StyleSheet, Image, Alert, addons } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import GlobalStyles from '../styles/GlobalStyles';
+import Plantdetail from '../components/PlantDetails';
 
-const PlantScreen = ({ navigation }) => {
- 
+function PlantScreen ({ navigation }) {
+
+  const apiCall = async() => {
+    fetch('http://192.168.1.10:3000/api/plants/status', {
+        method: 'GET',
+        headers: {
+        Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + await AsyncStorage.getItem('token')
+        },
+    })
+    .then((response) => response.json())
+    .then((response) => {
+      console.log(response);
+    })
+  }
+
   return (
+//     <View style = {GlobalStyles.screenContainer}>
+//       <View style = {{margin : 20}}>
+//         <TouchableOpacity style = {{width:150, alignSelf: 'flex-end', backgroundColor: '#006400', 
+//         marginBottom: 30}} onPress = {apiCall}>
+//           <Text style = {GlobalStyles.buttonText}>Get status</Text>
+//         </TouchableOpacity>
+//         <Text style = {styles.textHeaderStyle}>Tanaman 1</Text>
+
+//         <View style = {{flexDirection : 'row'}}>
+//           <Image style = {styles.imageStyle} source = {require('../assets/images/oasys.png')}/>
+//           <View style = {{justifyContent : 'center'}}>
+//             <Text style = {styles.textContentStyle}>Temparature</Text>
+//             <Text style = {styles.textContentStyle}>Time</Text>
+//           </View>
+//         </View>
+
+//       </View>
+// >>>>>>> 63e0c3d6f3e7ee5fd2e679d94afa86b480ea5c4d
+//     </View>
+// );
     <View>
-        {/* Nanti Value nya di ganti objek di API yang mau kita masukan */}
-        <Plantdetail title = "tanaman 1" temperature = "20" humidity = "78" time = "15 : 30"/>
-        <Plantdetail title = "tanaman 2" temperature = "21" humidity = "66" time = "15 : 30"/>
-        <Plantdetail title = "tanaman 3" temperature = "21" humidity = "66" time = "15 : 30"/>
+    {/* Nanti Value nya di ganti objek di API yang mau kita masukan */}
+    <Plantdetail title = "tanaman 1" temperature = "20" humidity = "78" time = "15 : 30"/>
+    <Plantdetail title = "tanaman 2" temperature = "21" humidity = "66" time = "15 : 30"/>
+    <Plantdetail title = "tanaman 3" temperature = "21" humidity = "66" time = "15 : 30"/>
     </View>
-);
+  );
 }
 
 const styles = StyleSheet.create({
