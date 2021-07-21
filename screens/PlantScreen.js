@@ -29,9 +29,10 @@ function PlantScreen ({navigation}) {
     .then((response) => response.json())
     .then((response) => {
       setLoading(false);
-      console.log(response);
+      // console.log(response);
       // Kalau udah dapat akses
-      // setTemperature(response.data.message.items.temperature);
+      // setTemperature(response.data.message.items);
+      // console.log(temperature);
       // setHumidity(response.data.message.items.soilHumidity);
       // setTime(response.data.message.items.timeStamp);
     })
@@ -47,9 +48,10 @@ function PlantScreen ({navigation}) {
       </View>
       <View>
     {/* Nanti Value nya di ganti objek di API yang mau kita masukan */}
-    <Plantdetail title = "tanaman 1" temperature = "20" humidity = "78" time = "15 : 30" number = {1}/>
-    <Plantdetail title = "tanaman 2" temperature = "21" humidity = "66" time = "15 : 30"number = {2}/>
-    <Plantdetail title = "tanaman 3" temperature = "21" humidity = "66" time = "15 : 30" number = {3}/>
+    {/* <Plantdetail title = {title} temperature = {temperature} humidity = {humidity} time = {time} number = {1}/> */}
+    <Plantdetail title = "Tanaman" temperature = "20" humidity = "78" time = "15 : 30" number = {1}/>
+    {/* <Plantdetail title = "tanaman 2" temperature = "21" humidity = "66" time = "15 : 30"number = {2}/> */}
+    {/* <Plantdetail title = "tanaman 3" temperature = "21" humidity = "66" time = "15 : 30" number = {3}/> */}
     </View>
     </ScrollView>
 );

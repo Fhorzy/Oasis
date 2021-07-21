@@ -6,7 +6,7 @@ import GlobalStyles from '../styles/GlobalStyles';
 const Plantdetail = ({title, temperature, humidity, time, number}) => {
 
     const apiCall = async() => {
-        fetch('http://192.168.1.10:3000/api/plants/water/'+number, {
+        fetch('http://192.168.1.10:3000/api/plants/water', {
             method: 'POST',
             headers: {
             Accept: 'application/json',
@@ -14,7 +14,7 @@ const Plantdetail = ({title, temperature, humidity, time, number}) => {
               'Authorization': 'Bearer ' + await AsyncStorage.getItem('token')
             },
         })
-        .then((response) => response.text())
+        .then((response) => response.json())
         .then((response) => {
             console.log(response);
             // alert('Success');

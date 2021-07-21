@@ -41,12 +41,7 @@ function ProfileScreen ({ navigation }) {
     <ScrollView style={GlobalStyles.screenContainer}>
       <View>
       
-      {avatar.slice(-4) === "null" ?
-      <View style={styles.profileHeaderPicCircle}>
-        <Text style={{fontSize: 72, color: '#ffffff', alignSelf: 'center'}}>
-            {name.charAt(0)}
-        </Text>
-      </View> : <Image source = {{uri: avatar}} style={styles.profile_picture} /> }
+      <Image source = {{uri: avatar}} style={styles.profile_picture} />
 
       <View style = {{flexDirection: 'row'}}>
         <Text style={styles.textDescription}>Name     :  </Text>
