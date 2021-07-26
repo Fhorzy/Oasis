@@ -4,37 +4,39 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import GlobalStyles from '../styles/GlobalStyles';
 import Plantdetail from '../components/PlantDetails';
 
-function PlantScreen ({navigation}) {
-  const [loading, setLoading] = useState('');
-  const [title, setTitle] = useState('');
+function PlantScreen () {
   const [temperature, setTemperature] = useState('');
   const [humidity, setHumidity] = useState('');
   const [time, setTime] = useState('');
+  const [results, setResult] = useState([]);
 
   useEffect(() => {
-    setLoading(true);
     apiCall();
   }, [])
 
 
-  const apiCall = async() => {
-    await fetch('http://192.168.1.10:3000/api/plants/status', {
+  async function apiCall() {
+    try {
+      await fetch('http://192.168.1.10:3000/api/plants/status', {
         method: 'GET',
         headers: {
         Accept: 'application/json',
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + await AsyncStorage.getItem('token')
         },
-    })
-    .then((response) => response.json())
-    .then((response) => {
-      setLoading(false);
-      console.log(response);
-      // Kalau udah dapat akses
-      // setTemperature(response.data.message.items.temperature);
-      // setHumidity(response.data.message.items.soilHumidity);
-      // setTime(response.data.message.items.timeStamp);
-    })
+      })
+      .then((response) => response.json())
+      .then((response) => {
+        setResult([response.data.message.Items[0]]); 
+        results.map((result) => {
+          setHumidity(result.soilHumidity);
+          setTemperature(result.temperature);
+          setTime(result.created_at);
+      });
+      })
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -46,10 +48,7 @@ function PlantScreen ({navigation}) {
         </TouchableOpacity>
       </View>
       <View>
-    {/* Nanti Value nya di ganti objek di API yang mau kita masukan */}
-    <Plantdetail title = "tanaman 1" temperature = "20" humidity = "78" time = "15 : 30" number = {1}/>
-    <Plantdetail title = "tanaman 2" temperature = "21" humidity = "66" time = "15 : 30"number = {2}/>
-    <Plantdetail title = "tanaman 3" temperature = "21" humidity = "66" time = "15 : 30" number = {3}/>
+    <Plantdetail title = "Tanaman" temperature = {temperature} humidity = {humidity} time = {time} number = {2}/>
     </View>
     </ScrollView>
 );

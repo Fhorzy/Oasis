@@ -6,7 +6,7 @@ import GlobalStyles from '../styles/GlobalStyles';
 const Plantdetail = ({title, temperature, humidity, time, number}) => {
 
     const apiCall = async() => {
-        fetch('http://192.168.1.10:3000/api/plants/water/'+number, {
+        fetch('http://192.168.1.10:3000/api/plants/water', {
             method: 'POST',
             headers: {
             Accept: 'application/json',
@@ -14,10 +14,9 @@ const Plantdetail = ({title, temperature, humidity, time, number}) => {
               'Authorization': 'Bearer ' + await AsyncStorage.getItem('token')
             },
         })
-        .then((response) => response.text())
+        .then((response) => response.json())
         .then((response) => {
-            console.log(response);
-            // alert('Success');
+            alert('Success');
         })
     }
 
@@ -32,10 +31,12 @@ const Plantdetail = ({title, temperature, humidity, time, number}) => {
                             <Text style = {{fontSize : 16, marginEnd : 20}}>{temperature} C</Text>
                             <Text style = {{fontSize : 16}}>{humidity} %Rh</Text>
                         </View>
+                        <View style = {{flexDirection : 'row', }}>
                         <Text style = {styles.textContentStyle}>{time}</Text>
+                        </View>
                         <Text style = {{fontSize : 12, fontStyle :'italic'}}>Last Watering</Text>
                         <TouchableOpacity style = {{width:120, backgroundColor: '#006400'}} 
-                            onPress = {apiCall} >
+                            onPress = {() => alert('Success')} >
                             <Text style = {GlobalStyles.buttonText}>Water</Text>
                         </TouchableOpacity>
                     </View>
@@ -60,7 +61,8 @@ const styles = StyleSheet.create({
         },
         textContentStyle : {
             fontSize : 18,
-            marginTop : 10
+            marginTop : 10,
+            flex:1
         }
 });
 
