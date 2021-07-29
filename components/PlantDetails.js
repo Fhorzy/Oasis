@@ -36,7 +36,7 @@ const Plantdetail = ({title, temperature, humidity, time, number}) => {
                         </View>
                         <Text style = {{fontSize : 12, fontStyle :'italic'}}>Last Watering</Text>
                         <TouchableOpacity style = {{width:120, backgroundColor: '#006400'}} 
-                            onPress = {() => alert('Success')} >
+                            onPress = {apiCall} >
                             <Text style = {GlobalStyles.buttonText}>Water</Text>
                         </TouchableOpacity>
                     </View>
