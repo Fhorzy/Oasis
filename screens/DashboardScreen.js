@@ -9,6 +9,7 @@ function PlantScreen () {
   const [humidity, setHumidity] = useState('');
   const [time, setTime] = useState('');
   const [results, setResult] = useState([]);
+  const [lastwater, setLastWater] = useState([]);
 
   useEffect(() => {
     apiCall();
@@ -27,12 +28,15 @@ function PlantScreen () {
       })
       .then((response) => response.json())
       .then((response) => {
-        setResult([response.data.message.Items[0]]); 
+        setResult([response.data.message.Items[0]]);
         results.map((result) => {
           setHumidity(result.soilHumidity);
           setTemperature(result.temperature);
-          setTime(result.created_at);
-      });
+        });
+        setLastWater([response.data.last_water]);
+        lastwater.map((lastwater) => {
+          setTime(lastwater.Items[0].created_at);
+        });
       })
     } catch (error) {
       console.log(error);
