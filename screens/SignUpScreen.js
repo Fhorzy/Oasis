@@ -6,7 +6,7 @@ const SignUpScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm_password, setConfirmPassword] = useState('');
-  const [name, setName] = useState('');
+  const [name, setName] = useState(null);
 
   const validate = () => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -53,10 +53,10 @@ const SignUpScreen = ({navigation}) => {
     //api
     fetch('http://192.168.1.10:3000/api/credentials/register', {
       method: 'POST',
-      body: JSON.stringify(formBody),
+      body: JSON.stringify(dataToSend),
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        'Content-Type': 'application/json',
       },
     })
     .then((response) => response.json())
@@ -68,6 +68,7 @@ const SignUpScreen = ({navigation}) => {
         } else {
           // Response message backend
           alert(response.data.message);
+          console.log(response);
           // alert('Failed to create account');
         }
       })
