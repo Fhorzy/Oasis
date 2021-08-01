@@ -12,18 +12,23 @@ function ChangePassword ({navigation}) {
     const apiCall = async () => {
         if(!password) {
             alert('Please input your password');
+            return ;
         }
         if(!new_password) {
             alert('Please input your new password');
+            return ;
         }
         if(new_password.length < 6) {
-            alert('Password at least 6 characters')
+            alert('Password at least 6 characters');
+            return ;
         }
         if(password === new_password) {
             alert('New password should not be same from the old one');
+            return ;
         }
         if(new_password !== confirm_password) {
-            alert('Password not match')
+            alert('Password not match');
+            return ;
         }
 
         let keys;
@@ -69,6 +74,7 @@ function ChangePassword ({navigation}) {
             placeholder = {'Old Password'}
             secureTextEntry = {true}
             style = {styles.input}
+            
             autoCapitalize = 'none' />
         </View>
         <Text style = {{paddingTop: 10, fontSize: 20, paddingLeft: 30}}>

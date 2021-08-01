@@ -9,6 +9,7 @@ function AddAddress ({navigation}) {
     const apiCall = async () => {
         if(!address) {
             alert('Please input address');
+            return ;
         }
 
         let keys;

@@ -9,6 +9,7 @@ function AddPhoneNumber ({navigation}) {
     const apiCall = async () => {
         if(!phone_number) {
             alert('Please input phone number');
+            return ;
         }
 
         let keys;
