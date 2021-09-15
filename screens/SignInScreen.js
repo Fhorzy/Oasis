@@ -36,7 +36,6 @@ function SignInScreen ({navigation}) {
     }
     formBody = formBody.join('&');
 
-    // api
     fetch('http://192.168.1.10:3000/api/credentials/login', {
       method: 'POST',
       body: JSON.stringify(dataToSend),
@@ -47,15 +46,12 @@ function SignInScreen ({navigation}) {
     })
     .then((response) => response.json())
       .then((response) => {
-        // If api message same as data
         if (response.code == 200) {
           AsyncStorage.setItem('token', response.data.token);
           alert(response.data.message);
           navigation.replace('DrawerNavigation');
         } else {
-          // Response backend messsage
           alert(response.data.message);
-          // alert('Please check your email or password');
         }
       })
       .catch((error) => {

@@ -19,7 +19,6 @@ function AddAddress ({navigation}) {
             console.log(error);
         }
 
-        // api
         fetch('http://192.168.1.10:3000/api/profile/edit/address', {
             method: 'POST',
             body: {address: address},
@@ -31,7 +30,6 @@ function AddAddress ({navigation}) {
         })
         .then((response) => response.json())
             .then((response) => {
-            // If api message same as data
             if (response.code == 200) {
                 alert(response.data.message);
                 navigation.replace('ProfileScreen');

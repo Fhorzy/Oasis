@@ -38,7 +38,6 @@ function ChangePassword ({navigation}) {
             console.log(error);
         }
 
-        // api
         fetch('http://192.168.1.10:3000/api/credentials/edit/password', {
             method: 'PUT',
             body: JSON.stringify({old_password: password, new_password: new_password}),
@@ -50,7 +49,6 @@ function ChangePassword ({navigation}) {
         })
         .then((response) => response.json())
             .then((response) => {
-            // If api message same as data
             if (response.code == 200) {
                 alert(response.data.message);
                 navigation.replace('ProfileScreen');

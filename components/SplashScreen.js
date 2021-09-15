@@ -14,8 +14,6 @@ const SplashScreen = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
       setAnimating(false);
-      //Check token, if token exist send to dashboard screen
-      //If not send to auth
       AsyncStorage.getItem('token').then((value) =>
         navigation.replace(
           value === null ? 'Auth' : 'DrawerNavigation'

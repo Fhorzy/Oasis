@@ -13,7 +13,6 @@ function EditProfileScreen (props) {
         console.log(error);
     }
 
-    // api
     fetch('http://192.168.1.10:3000/api/credentials/de-actived', {
         method: 'DELETE',
         body: JSON.stringify({agree: true}),
@@ -25,8 +24,6 @@ function EditProfileScreen (props) {
     })
     .then((response) => response.json())
         .then((response) => {
-            // console.log(response);
-        // If api message same as data
         if (response.code == 200) {
             AsyncStorage.clear();
             alert(response.data.message);

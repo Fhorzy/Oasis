@@ -50,7 +50,6 @@ const SignUpScreen = ({navigation}) => {
     }
     formBody = formBody.join('&');
     
-    //api
     fetch('http://192.168.1.10:3000/api/credentials/register', {
       method: 'POST',
       body: JSON.stringify(dataToSend),
@@ -61,15 +60,12 @@ const SignUpScreen = ({navigation}) => {
     })
     .then((response) => response.json())
       .then((response) => {
-        // If api response message equals to success
         if (response.code == 200) {
           alert(response.data.message);
           navigation.replace('SignInScreen');
         } else {
-          // Response message backend
           alert(response.data.message);
           console.log(response);
-          // alert('Failed to create account');
         }
       })
       .catch((error) => {
@@ -135,7 +131,6 @@ const SignUpScreen = ({navigation}) => {
     </View>
   );
 }
-// }
 
 const styles = StyleSheet.create({
   logo: {

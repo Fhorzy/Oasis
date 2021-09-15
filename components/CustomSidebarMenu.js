@@ -12,20 +12,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CustomSidebarMenu = (props) => {
 
-  const nama = 'Budi';
   return (
     <View style={styles.layout}>
-      {/* Masih mencari cara untuk narik api GET UserProfile buat dapat nama dan avatar */}
-      {/* <View style={styles.profileHeader}>
-        <View style={styles.profileHeaderPicCircle}>
-          <Text style={{fontSize: 25, color: '#307ecc'}}>
-            {nama.charAt(0)}
-          </Text>
-        </View>
-        <Text style={styles.profileHeaderText}>
-          {nama}
-        </Text>
-      </View> */}
       <View style={styles.line} />
 
       <DrawerContentScrollView {...props}>
