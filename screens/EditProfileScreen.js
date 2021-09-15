@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import GlobalStyles from '../styles/GlobalStyles';
+import url from '../url';
 
 function EditProfileScreen (props) {
 
@@ -13,7 +14,7 @@ function EditProfileScreen (props) {
         console.log(error);
     }
 
-    fetch('http://192.168.1.10:3000/api/credentials/de-actived', {
+    fetch(url + '/api/credentials/de-actived', {
         method: 'DELETE',
         body: JSON.stringify({agree: true}),
         headers: {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import GlobalStyles from '../styles/GlobalStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import url from '../url';
 
 function AddAddress ({navigation}) {
     const [address, setAddress] = useState('');
@@ -19,7 +20,7 @@ function AddAddress ({navigation}) {
             console.log(error);
         }
 
-        fetch('http://192.168.1.10:3000/api/profile/edit/address', {
+        fetch(url + '/api/profile/edit/address', {
             method: 'POST',
             body: {address: address},
             headers: {

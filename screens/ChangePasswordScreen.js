@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import GlobalStyles from '../styles/GlobalStyles';
+import url from '../url';
 
 
 function ChangePassword ({navigation}) {
@@ -38,7 +39,7 @@ function ChangePassword ({navigation}) {
             console.log(error);
         }
 
-        fetch('http://192.168.1.10:3000/api/credentials/edit/password', {
+        fetch(url + '/api/credentials/edit/password', {
             method: 'PUT',
             body: JSON.stringify({old_password: password, new_password: new_password}),
             headers: {

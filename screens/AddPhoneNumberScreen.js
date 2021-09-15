@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import GlobalStyles from '../styles/GlobalStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import url from '../url';
 
 function AddPhoneNumber ({navigation}) {
     const [phone_number, setPhoneNumber] = useState('');
@@ -19,7 +20,7 @@ function AddPhoneNumber ({navigation}) {
             console.log(error);
         }
 
-        fetch('http://192.168.1.10:3000/api/profile/edit/phone_number', {
+        fetch(url + '/api/profile/edit/phone_number', {
             method: 'POST',
             body: {phone_number: phone_number},
             headers: {

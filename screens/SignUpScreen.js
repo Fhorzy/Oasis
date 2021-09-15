@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import url from '../url';
 
 const SignUpScreen = ({navigation}) => {
 
@@ -50,7 +51,7 @@ const SignUpScreen = ({navigation}) => {
     }
     formBody = formBody.join('&');
     
-    fetch('http://192.168.1.10:3000/api/credentials/register', {
+    fetch(url + '/api/credentials/register', {
       method: 'POST',
       body: JSON.stringify(dataToSend),
       headers: {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Text, Button, TextInput, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import url from '../url';
 
 function SignInScreen ({navigation}) {
 
@@ -36,7 +37,7 @@ function SignInScreen ({navigation}) {
     }
     formBody = formBody.join('&');
 
-    fetch('http://192.168.1.10:3000/api/credentials/login', {
+    fetch(url + '/api/credentials/login', {
       method: 'POST',
       body: JSON.stringify(dataToSend),
       headers: {

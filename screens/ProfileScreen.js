@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import GlobalStyles from '../styles/GlobalStyles';
+import url from '../url';
 
 function ProfileScreen ({ navigation }) {
   const [name, setName] = useState('');
@@ -14,7 +15,7 @@ function ProfileScreen ({ navigation }) {
       setLoading(true);
 
       try {
-        await fetch('http://192.168.1.10:3000/api/profile', {
+        await fetch(url + '/api/profile', {
           method: 'GET',
           headers: {
           Accept: 'application/json',
@@ -25,6 +26,7 @@ function ProfileScreen ({ navigation }) {
         .then((response) => response.json())
         .then((response) => {
           setLoading(false);
+          console.log(url);
           setName(response.data.user_info.name);
           setEmail(response.data.user_info.email);
           setAvatar(response.data.user_info.avatar);

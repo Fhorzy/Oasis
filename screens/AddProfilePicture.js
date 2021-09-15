@@ -3,6 +3,7 @@ import { View, Image, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import GlobalStyles from '../styles/GlobalStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import url from '../url';
 
 function addProfilePicture({navigation}) {
   const [image, setImage] = useState();
@@ -48,7 +49,7 @@ const uploadImage = async() => {
       console.log(error);
     } 
     
-    fetch('http://192.168.1.10:3000/api/profile/upload/avatar/', {
+    fetch(url + '/api/profile/upload/avatar/', {
       method: 'POST',
       body: form,
       headers: {

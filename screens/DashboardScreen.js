@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, TextInput, View, StyleSheet, Image, Alert, addo
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import GlobalStyles from '../styles/GlobalStyles';
 import Plantdetail from '../components/PlantDetails';
+import url from '../url';
 
 function PlantScreen () {
   const [temperature, setTemperature] = useState('');
@@ -18,7 +19,7 @@ function PlantScreen () {
 
   async function apiCall() {
     try {
-      await fetch('http://192.168.1.10:3000/api/plants/status', {
+      await fetch(url + '/api/plants/status', {
         method: 'GET',
         headers: {
         Accept: 'application/json',
@@ -83,7 +84,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#00FF00',
     marginBottom: 10,
   },
-  //My Own Style
   imageStyle : {
     width : 120,
     height : 120,

@@ -2,11 +2,13 @@ import React from 'react';
 import  {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import GlobalStyles from '../styles/GlobalStyles';
+import url from '../url';
+
 
 const Plantdetail = ({title, temperature, humidity, time, number}) => {
 
     const apiCall = async() => {
-        fetch('http://192.168.1.10:3000/api/plants/water', {
+        fetch(url + '/api/plants/water', {
             method: 'POST',
             headers: {
             Accept: 'application/json',
